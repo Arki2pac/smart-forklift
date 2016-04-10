@@ -54,4 +54,20 @@ public class RegresjaWielowymiarowa{
         public double R2() {
             return 1.0 - SSE/SST;
         }
+
+    public void read(){
+        System.out.println();
+        System.out.println(beta(0) + " +\n + (" + beta(1) + " * objętość) +\n + (" + beta(2) + " * kolor) + \n + (" + beta(3) + " * waga) +\n + (" + beta(4) + " * łatwopalne) ");
+    }
+
+    public void porownanie(double x[][], double[] y){
+        double[] wartość = new double[x.length];
+        int przyblizenie = 0;
+        System.out.println();
+        for(int i = 0; i < x.length; i++){
+            wartość[i] = beta(0) + beta(1) * x[i][1] + beta(2) * x[i][2] + beta(3) * x[i][3] + beta(4) * x[i][4];
+            przyblizenie = (int) Math.round(wartość[i]);
+            System.out.println("Oryginał: " +y[i] + " || Po regresji: " + wartość[i] + " || Po przybliżeniu: " + przyblizenie);
+        }
+    }
 }

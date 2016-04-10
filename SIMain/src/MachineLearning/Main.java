@@ -1,6 +1,5 @@
 package MachineLearning;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -10,6 +9,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         ZapisOdczytZPliku zapisOdczytZPliku = new ZapisOdczytZPliku();
         Dane dane = new Dane();
-        dane.pobranieDoTablicy();
+        RegresjaWielowymiarowa regresjaWielowymiarowa = new RegresjaWielowymiarowa(dane.pobranieDoTablicyCech(), dane.pobranieDoTablicywartosci());
+        regresjaWielowymiarowa.porownanie(dane.pobranieDoTablicyCech(), dane.pobranieDoTablicywartosci());
+        regresjaWielowymiarowa.read();
+        System.out.println();
+        dane.wypisanieTablic(dane.pobranieDoTablicywartosci(),dane.pobranieDoTablicyCech());
     }
 }

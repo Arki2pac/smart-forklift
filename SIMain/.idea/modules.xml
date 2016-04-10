@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SI.iml" filepath="$PROJECT_DIR$/SI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SIMain.iml" filepath="$PROJECT_DIR$/SIMain.iml" />
     </modules>
   </component>
 </project>
