@@ -16,11 +16,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import sample.astar.Astar;
+import sample.astar.AstarPoints;
 
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
+
 
 
 public class Main extends Application {
@@ -72,8 +75,11 @@ public class Main extends Application {
 
     // Random for oil spawns
     static Random oilRandom = new Random();
-    // Array for oil spawns
+    // Arrays for oil spawns
     static int oilArray[] = new int[10];
+    static int oilsToDraw[] = new int[10];
+    static int oilsCoordinates[][] = new int[10][2];
+
     // Random for algorithm points
     static Random randPoints = new Random();
 
@@ -112,10 +118,9 @@ public class Main extends Application {
             {12, 10},
             {12, 13}, {11, 13}, {10, 13}, {9, 13}, {8, 13}, {7, 13}, {6, 13}, {5, 13}, {4, 13},
             {3, 13}, {3, 14}, {4, 14}, {5, 14}, {6, 14}, {7, 14}, {8, 14}, {9, 14}, {10, 14},
-            {11, 14}, {12, 14},
-
-
+            {11, 14}, {12, 14}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}
     };
+
     static int[][] casesCoordinates = {
             {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0}, {10, 0}, {11, 0}, {12, 0},
             {3, 3}, {4, 3}, {5, 3}, {6, 3}, {7, 3}, {8, 3}, {9, 3}, {10, 3}, {11, 3}, {12, 3},
@@ -131,10 +136,11 @@ public class Main extends Application {
             {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7}, {0, 8}, {0, 9}, {0, 10}, {0, 11}, {0, 12},
             {0, 13}, {0, 14}, {0, 15}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {1, 6}, {1, 7}, {1, 8}, {1, 9}, {1, 10}, {1, 11}, {1, 12},
             {1, 13}, {1, 14}, {1, 15},{2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {2, 10}, {2, 11}, {2, 12},
-            {2, 13}, {2, 14}, {2, 15}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {3, 10}, {3, 11}, {3, 12},
-            {3, 13}, {3, 14}, {3, 15}, {14, 0}, {14, 1}, {14, 2}, {14, 3}, {14, 4}, {14, 5}, {14, 6}, {14, 7}, {14, 8}, {14, 9}, {14, 10}, {14, 11}, {14, 12},
+            {2, 13}, {2, 14}, {2, 15}, {14, 0}, {14, 1}, {14, 2}, {14, 3}, {14, 4}, {14, 5}, {14, 6}, {14, 7}, {14, 8}, {14, 9}, {14, 10}, {14, 11}, {14, 12},
             {14, 13}, {14, 14}, {14, 15}, {15, 0}, {15, 1}, {15, 2}, {15, 3}, {15, 4}, {15, 5}, {15, 6}, {15, 7}, {15, 8}, {15, 9}, {15, 10}, {15, 11}, {15, 12},
-            {15, 13}, {15, 14}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}, {15, 15}
+            {15, 13}, {15, 14}, {15, 15},
+
+
     };
     public int iterator = 0;
 
@@ -169,7 +175,7 @@ public class Main extends Application {
 
         // ZAMIANA NA WSPÓŁRZĘDNE
         for(int i = 0; i < oilArray.length; i++) {
-            graphicsContext.drawImage(oilSlick, astarBlockedPoints[70 + i][0], astarBlockedPoints[70 + 1][1]);
+            graphicsContext.drawImage(oilSlick, oilsCoordinates[i][0] + 5, oilsCoordinates[i][1] + 25);
         }
 
 
@@ -218,41 +224,41 @@ public class Main extends Application {
 
 
         // Arrow keys moving
-        if (currentlyActiveKeys.contains("LEFT"))
-        {
-            actualPositionW = actualPositionW - 1.5;
-            graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
-            leftOrRight = false;
-        }
-        else if (currentlyActiveKeys.contains("RIGHT"))
-        {
-            actualPositionW = actualPositionW + 1.5;
-            graphicsContext.drawImage(caseOne, actualPositionW , actualPositionH);
-            leftOrRight = true;
-        }
-        else if (currentlyActiveKeys.contains("DOWN")) {
-            actualPositionH = actualPositionH + 1.5;
-            if (leftOrRight == true) {
-                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
-            } else {
-                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
-            }
-        }
-        else if (currentlyActiveKeys.contains("UP")) {
-            actualPositionH = actualPositionH - 1.5;
-            if (leftOrRight == true) {
-                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
-            } else {
-                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
-            }
-        }
-        else {
-            if (leftOrRight == true) {
-                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
-            } else {
-                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
-            }
-        }
+//        if (currentlyActiveKeys.contains("LEFT"))
+//        {
+//            actualPositionW = actualPositionW - 1.5;
+//            graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
+//            leftOrRight = false;
+//        }
+//        else if (currentlyActiveKeys.contains("RIGHT"))
+//        {
+//            actualPositionW = actualPositionW + 1.5;
+//            graphicsContext.drawImage(caseOne, actualPositionW , actualPositionH);
+//            leftOrRight = true;
+//        }
+//        else if (currentlyActiveKeys.contains("DOWN")) {
+//            actualPositionH = actualPositionH + 1.5;
+//            if (leftOrRight == true) {
+//                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
+//            } else {
+//                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
+//            }
+//        }
+//        else if (currentlyActiveKeys.contains("UP")) {
+//            actualPositionH = actualPositionH - 1.5;
+//            if (leftOrRight == true) {
+//                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
+//            } else {
+//                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
+//            }
+//       }
+//       else {
+//            if (leftOrRight == true) {
+//                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
+//            } else {
+//                graphicsContext.drawImage(caseOne, actualPositionW, actualPositionH);
+//            }
+//        }
 
     }
 
@@ -267,6 +273,30 @@ public class Main extends Application {
                     it++;
                 }
             }
+        }
+    }
+
+    // Get coordinates of oil slicks
+
+    private static void getOilSlickNumber() {
+
+        for(int i = 0; i < oilArray.length; i ++) {
+            for(int j = 0; j < algorithmAvailablePoints.size(); j++) {
+                if((algorithmAvailablePoints.get(j).getX() == astarBlockedPoints[80 + i][0]) &&
+                        algorithmAvailablePoints.get(j).getY() == astarBlockedPoints[80 + i][1]) {
+
+//                    System.out.print(j + "Dla: X: " + astarBlockedPoints[80 + i][0] + " Y: " + astarBlockedPoints[80 + i][1] + "\n");
+                    oilsToDraw[i] = j;
+                }
+            }
+        }
+    }
+
+    private static void convertOilNumberToCoordinates() {
+        for(int i = 0; i < oilsToDraw.length; i++) {
+//            System.out.print("X: " + multiplePoints.get(oilsToDraw[i]).getX() + " Y: " + multiplePoints.get(oilsToDraw[i]).getY() + "\n");
+            oilsCoordinates[i][0] = multiplePoints.get(oilsToDraw[i]).getX();
+            oilsCoordinates[i][1] = multiplePoints.get(oilsToDraw[i]).getY();
         }
     }
 
@@ -302,22 +332,87 @@ public class Main extends Application {
     public void start(Stage mainStage) throws Exception {
 
 
-        for(int i = 0; i < 10; i++) {
+//        for(int i = 0; i < 5; i++) {
+//            int oilRandomPoint = oilRandom.nextInt(algorithmAvailablePoints.size());
+//        }
 
-            int randOil = oilRandom.nextInt(pointsForOil.length) - 1;
-            oilArray[i] = randOil;
-            astarBlockedPoints[70 + i] = pointsForOil[randOil];
 
-        }
+       /* ********************************* START ALGORITHM!!!!!!!!!!! *************************************************
+        a - array size (our map has 16x16)
+        sy - start point y
+        sx - start point x
+        dy - destination point y
+        dx - destination point x
+        z - array with blocked points
 
-        for(int i=0;i<10;i++) {
-            System.out.print(oilArray[i] + "\n");
-        }
-        System.out.print(astarBlockedPoints[71][0] + " " + astarBlockedPoints[71][1]);
+                      a   a  sy  sx dy dx    z                       */
+        // astar.test(16, 16, 0, 0, 10, 8, astarBlockedPoints);
+
+
+//        int randX = randPoints.nextInt(15);
+//        int randY = randPoints.nextInt(15);
+//
+//        while (astar.foundPath == false) {
+//            randX = randPoints.nextInt(15);
+//            randY = randPoints.nextInt(15);
+//            astar.test(16, 16, 0, 0, randY, randX, astarBlockedPoints);
+//
+//        }
+//        for(int i = 0; i < 10; i++) {
+//
+//            int randOil = oilRandom.nextInt(pointsForOil.length);
+////            while(!contains(oilArray, randOil)) {
+////
+////                randOil = oilRandom.nextInt(pointsForOil.length) - 1;
+////            }
+//            oilArray[i] = randOil;
+//            astarBlockedPoints[80 + i] = pointsForOil[randOil];
+//
+//        }
+        // scenario for oil
+        oilArray[0] = 0;
+        astarBlockedPoints[81] = pointsForOil[0];
+        oilArray[1] = 15;
+        astarBlockedPoints[82] = pointsForOil[15];
+        oilArray[2] = 30;
+        astarBlockedPoints[83] = pointsForOil[30];
+        oilArray[3] = 32;
+        astarBlockedPoints[84] = pointsForOil[32];
+        oilArray[4] = 34;
+        astarBlockedPoints[85] = pointsForOil[34];
+        oilArray[5] = 36;
+        astarBlockedPoints[86] = pointsForOil[36];
+        oilArray[6] = 37;
+        astarBlockedPoints[87] = pointsForOil[37];
+        oilArray[7] = 17;
+        astarBlockedPoints[88] = pointsForOil[17];
+        astarBlockedPoints[89] = pointsForOil[21];
+        oilArray[9] = 7;
+        astarBlockedPoints[80] = pointsForOil[7];
+
+
+//        for(int i=0;i<10;i++) {
+//            System.out.print(oilArray[i] + "\n");
+//        }
+//        System.out.print(astarBlockedPoints[71][0] + " " + astarBlockedPoints[71][1]);
 
 
         int randCasePoint = randPoints.nextInt(80);
-        astar.test(16, 16, 0, 0, casesCoordinates[randCasePoint][0], casesCoordinates[randCasePoint][1], astarBlockedPoints);
+        //random
+//        astar.test(16, 16, 0, 0, casesCoordinates[randCasePoint][0], casesCoordinates[randCasePoint][1], astarBlockedPoints);
+
+        //scenario 1
+        //  astar.test(16,16,0,0,15,15,astarBlockedPoints);
+
+        //scenrio 2
+        //  astar.test(16,16,0,0,12,8,astarBlockedPoints);
+
+        //scenario 3
+        astar.test(16,16,0,0,4,15,astarBlockedPoints);
+
+        //scenario 4 not possible
+        //  astar.test(16,16,0,0,3,2,astarBlockedPoints);
+
 
         prepareKnowledgeBase();
 
@@ -334,7 +429,12 @@ public class Main extends Application {
 
 
 
+
+
         prepareMultiplePoints();
+
+        getOilSlickNumber();
+        convertOilNumberToCoordinates();
 
         Map<String, List<String>> knowledgeBase = Main.knowledgeBase.getKnowledgeBase();
         //System.out.println(knowledgeBase.toString());
@@ -378,6 +478,7 @@ public class Main extends Application {
                 }
         );
 
+
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("sample.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
@@ -413,6 +514,8 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
         // Get random spawn points and random cases.
         IntStream.range(0, 20).forEach(
@@ -466,6 +569,10 @@ public class Main extends Application {
 
                 }
         );
+
+//        for (int i = 0; i < algorithmAvailablePoints.size(); i++) {
+//            System.out.print("X:" + algorithmAvailablePoints.get(i).getX() + " Y:" + algorithmAvailablePoints.get(i).getY() + "\n");
+//        }
 
 
     }
