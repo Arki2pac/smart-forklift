@@ -271,8 +271,8 @@ public class Main extends Application {
         graphicsContext.setLineWidth(1);
 
 
-        graphicsContext.fillText("X: " + (int)actualPositionW, 1200, 50);
-        graphicsContext.fillText("Y: " + (int)actualPositionH, 1350, 50);
+        graphicsContext.fillText("X: " + actualPositionW, 1200, 50);
+        graphicsContext.fillText("Y: " + actualPositionH, 1350, 50);
 
         graphicsContext.fillText("Output:", 1200, 150);
     }

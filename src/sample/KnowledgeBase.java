@@ -12,7 +12,6 @@ public class KnowledgeBase {
     private Map<String, List<String>> knowledgeBase;
 
     public KnowledgeBase() {
-
         knowledgeBase = new HashMap<>();
     }
 
@@ -37,7 +36,6 @@ public class KnowledgeBase {
     }
 
     public Map<String, List<String>> getKnowledgeBase() {
-
         return knowledgeBase;
     }
 }

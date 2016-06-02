@@ -18,5 +18,6 @@
 * Mateusz Kociszewski - Genetic algorithm
 
 **Technologies:**
-* JavaFX
-* Java
+* [JavaFX](http://docs.oracle.com/javase/8/javase-clienttechnologies.htm)
+* [Java](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Jama](http://math.nist.gov/javanumerics/jama/)
