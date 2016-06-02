@@ -4,7 +4,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
@@ -42,4 +41,5 @@ hs_err_pid*
 /out/
 
 # mpeltonen/sbt-idea plugin
+.idea/
 .idea_modules/
