@@ -18,11 +18,14 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import sample.astar.*;
 import sample.MachineLearning.*;
+import sample.gui.*;
 
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.IntStream;
+
+import static sample.gui.graphic.*;
 
 
 public class Main extends Application {
@@ -44,28 +47,8 @@ public class Main extends Application {
     static KnowledgeBase knowledgeBase;
     static Astar astar;
     static int fieldNumber[] = new int[100];
-    // Forklifts
-    static Image forklift;
-    static Image forklift2;
 
-    // Etc
-    static Image background;
-    static Image conveyor;
-    static Image cover;
-
-    // Cases
-    static Image caseOne;
-    static Image caseTwo;
-    static Image caseThree;
-    static Image caseFour;
-    static Image caseFive;
-    static Image caseSix;
-    static Image caseSeven;
-    static Image caseEight;
     static double casePoints[][] = new double[80][2];
-
-    // Oil
-    static Image oilSlick;
 
     // Randoms for cases-spawns
     static Random caseSpawn = new Random();
@@ -150,23 +133,9 @@ public class Main extends Application {
         mainScene.setOnKeyReleased(event -> currentlyActiveKeys.remove(event.getCode().toString()));
     }
 
-    private static void loadGraphics() {
-        forklift = new Image("img/forklift.png");
-        forklift2 = new Image("img/forklift2.png");
-        background = new Image("img/background_test.png");
-        conveyor = new Image("img/conveyor.png");
-        cover = new Image("img/cover.png");
-        caseOne = new Image("img/case1.png");
-        caseTwo = new Image("img/case2.png");
-        caseThree = new Image("img/case3.png");
-        caseFour = new Image("img/case4.png");
-        caseFive = new Image("img/case5.png");
-        caseSix = new Image("img/case6.png");
-        caseSeven = new Image("img/case7.png");
-        caseEight = new Image("img/case8.png");
-        oilSlick = new Image("img/oil.png");
 
-    }
+
+
 
     private static void tickAndRender() {
         // clear canvas
