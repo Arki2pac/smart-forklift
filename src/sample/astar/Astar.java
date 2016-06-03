@@ -49,7 +49,7 @@ public class Astar {
     public static void setOilCost(int i, int j){
         Cell current;
         current = grid[i][j];
-        current.heuristicCost = 400;
+        current.heuristicCost = 800;
     }
 
     public static void setStartCell(int i, int j){

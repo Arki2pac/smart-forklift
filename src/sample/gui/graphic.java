@@ -1,32 +1,25 @@
 package sample.gui;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+
+import static sample.astar.oilArray.*;
+import static sample.gui.map.*;
+import static sample.gui.cases.*;
+import static sample.gui.forklift.*;
 
 /**
  * Created by infokomes on 03.06.16.
  */
 public class graphic {
 
-    // Forklifts
-    public static Image forklift;
-    public static Image forklift2;
-
     // Etc
     public static Image background;
     public static Image conveyor;
     public static Image cover;
 
-    // Cases
-    public static Image caseOne;
-    public static Image caseTwo;
-    public static Image caseThree;
-    public static Image caseFour;
-    public static Image caseFive;
-    public static Image caseSix;
-    public static Image caseSeven;
-    public static Image caseEight;
-    // Oil
-    public static Image oilSlick;
 
     public static void loadGraphics() {
         forklift = new Image("img/forklift.png");
@@ -43,6 +36,28 @@ public class graphic {
         caseSeven = new Image("img/case7.png");
         caseEight = new Image("img/case8.png");
         oilSlick = new Image("img/oil.png");
+    }
 
+    //Gui
+    public static void setStatement() {
+        Font theFont = Font.font("Helvetica", FontWeight.BOLD, 24);
+        graphicsContext.setFont(theFont);
+        graphicsContext.setStroke(Color.BLACK);
+        graphicsContext.setLineWidth(1);
+
+        graphicsContext.fillText("X: " + (int)actualPositionW, 1200, 50);
+        graphicsContext.fillText("Y: " + (int)actualPositionH, 1350, 50);
+
+        graphicsContext.fillText("Output:", 1200, 150);
+    }
+
+    public static void conveyorAnimated() {
+        graphicsContext.drawImage(conveyor, 5, conveyorPos - 600);
+        graphicsContext.drawImage(conveyor, 5, conveyorPos);
+        conveyorPos = conveyorPos + 0.5;
+        graphicsContext.drawImage(cover, 5, 618);
+        if (conveyorPos >= 600) {
+            conveyorPos = 0;
+        }
     }
 }

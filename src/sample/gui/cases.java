@@ -1,9 +1,30 @@
 package sample.gui;
 
+import javafx.scene.image.Image;
+
+import java.util.Random;
+
 /**
  * Created by infokomes on 03.06.16.
  */
 public class cases {
+
+    // Cases
+    public static Image caseOne;
+    public static Image caseTwo;
+    public static Image caseThree;
+    public static Image caseFour;
+    public static Image caseFive;
+    public static Image caseSix;
+    public static Image caseSeven;
+    public static Image caseEight;
+
+    public static double casePoints[][] = new double[80][2];
+
+    // Randoms for cases-spawns
+    public static Random caseSpawn = new Random();
+    public static Random caseNumber = new Random();
+    public static Image casesToSpawn[] = new Image[20];
 
     public static int[][] casesCoordinates = {
             {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0}, {10, 0}, {11, 0}, {12, 0},
@@ -15,6 +36,7 @@ public class cases {
             {3, 12}, {4, 12}, {5, 12}, {6, 12}, {7, 12}, {8, 12}, {9, 12}, {10, 12}, {11, 12}, {12, 12},
             {3, 15}, {4, 15}, {5, 15}, {6, 15}, {7, 15}, {8, 15}, {9, 15}, {10, 15}, {11, 15}, {12, 15},
     };
+
 
 
 

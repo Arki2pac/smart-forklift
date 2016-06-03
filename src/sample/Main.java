@@ -19,10 +19,12 @@ import java.util.stream.IntStream;
 import sample.astar.*;
 import sample.MachineLearning.*;
 
+import static sample.Controller.prepareActionHandlers;
 import static sample.astar.oilArray.*;
 import static sample.gui.graphic.*;
 import static sample.gui.map.*;
 import static sample.gui.cases.*;
+import static sample.gui.forklift.*;
 
 
 public class Main extends Application {
@@ -32,17 +34,16 @@ public class Main extends Application {
     static double mouseX = 0.0;
     static double mouseY = 0.0;
 
+    //Map
     static Map<Integer, AstarPoints> multiplePoints = new HashMap<Integer, AstarPoints>();
+
+    //KnowledgeBase
     static KnowledgeBase knowledgeBase;
+
+    //Strategies
     static Astar astar;
+    static LearningStrategy learningStrategy;
     static int fieldNumber[] = new int[100];
-
-    static double casePoints[][] = new double[80][2];
-
-    // Randoms for cases-spawns
-    static Random caseSpawn = new Random();
-    static Random caseNumber = new Random();
-    static Image casesToSpawn[] = new Image[20];
 
     // Random for algorithm cases
     static Random randPoints = new Random();
@@ -50,95 +51,7 @@ public class Main extends Application {
     // Boolean for pathfinding (true if came back, false if still walking)
     static boolean didComeBack = false;
 
-    // actual case on forklift
-    static Image actualCase;
-    static int locOfCases[] = new int[20];
-
-    static int movingTicks = 3;
-
-    // state if forklift is busy
-    static Boolean caseNotToSpawn = false;
-
-    // number of case that is on forklift
-    static int numberOfCase;
-
-    static double actualPositionH = 0;
-    static double actualPositionW = 110;
-    static double conveyorPos = 0.0;
-
-    static LearningStrategy learningStrategy;
-
-
-    // True if right, false if left
-    static boolean leftOrRight = true;
-    static boolean unlockPack = false;
-    static boolean returnMode = false;
-
-
     public int iterator = 0;
-
-    private static void prepareActionHandlers() {
-        mainScene.setOnKeyPressed(event -> currentlyActiveKeys.add(event.getCode().toString()));
-        mainScene.setOnKeyReleased(event -> currentlyActiveKeys.remove(event.getCode().toString()));
-    }
-
-
-    private static void tickAndRender() {
-        // clear canvas
-        graphicsContext.clearRect(0, 0, WIDTH, HEIGHT);
-        graphicsContext.drawImage(background, 0, 0);
-
-
-        // ZAMIANA NA WSPÓŁRZĘDNE
-        for(int i = 0; i < oilArray.length; i++) {
-            graphicsContext.drawImage(oilSlick, oilsCoordinates[i][0] + 5, oilsCoordinates[i][1] + 25);
-        }
-
-
-        // Spawn Cases.
-        IntStream.range(0, 20).forEach(
-                n -> {
-                    double distance = Math.sqrt(
-                            (Math.pow((actualPositionH - casePoints[locOfCases[n]][1]), 2)) +
-                                    (Math.pow((actualPositionW - casePoints[locOfCases[n]][0]),
-                                            2)));
-
-                    // if distance of forklift and case is greater than 30 draw all random cases
-                    if (distance > 55) {
-                        graphicsContext.drawImage(casesToSpawn[n], casePoints[locOfCases[n]][0],
-                                casePoints[locOfCases[n]][1]);
-
-                        // if distance of forklift and case < 30 change state that forklift is busy
-                    } else if (distance < 55 && unlockPack) {
-                        caseNotToSpawn = true;
-                        numberOfCase = n;
-
-                    }
-                    if (casesToSpawn[numberOfCase] != null && unlockPack) {
-                        actualCase = casesToSpawn[numberOfCase];
-                    }
-                    // if forklift is busy draw case on the forklift
-                    if (caseNotToSpawn == true && unlockPack) {
-                        graphicsContext
-                                .drawImage(actualCase, actualPositionW + 10, actualPositionH);
-                    }
-                }
-        );
-
-        // delete case from bookstand
-        casesToSpawn[numberOfCase] = null;
-
-        // if the forklift approaches the tape, we remove the pack
-        if (actualPositionW <= 60) {
-            caseNotToSpawn = false;
-            actualCase = null;
-        }
-
-        //leftOrRight = false;
-
-        graphicsContext.drawImage(forklift, actualPositionW, actualPositionH);
-
-    }
 
     // Get cases that algorithm returns [x,y] and change them to map cases for example [ 15,15 ] -> 255
     private static void getFieldNumber() {
@@ -154,22 +67,7 @@ public class Main extends Application {
         }
     }
 
-    // Get coordinates of oil slicks
-
-    private static void getOilSlickNumber() {
-
-        for(int i = 0; i < oilArray.length; i ++) {
-            for(int j = 0; j < algorithmAvailablePoints.size(); j++) {
-                if((algorithmAvailablePoints.get(j).getX() == astarBlockedPoints[80 + i][0]) &&
-                        algorithmAvailablePoints.get(j).getY() == astarBlockedPoints[80 + i][1]) {
-
-//                    System.out.print(j + "Dla: X: " + astarBlockedPoints[80 + i][0] + " Y: " + astarBlockedPoints[80 + i][1] + "\n");
-                    oilsToDraw[i] = j;
-                }
-            }
-        }
-    }
-
+// Oil Cordinate Converts
     private static void convertOilNumberToCoordinates() {
         for(int i = 0; i < oilsToDraw.length; i++) {
 //            System.out.print("X: " + multiplePoints.get(oilsToDraw[i]).getX() + " Y: " + multiplePoints.get(oilsToDraw[i]).getY() + "\n");
@@ -179,28 +77,7 @@ public class Main extends Application {
     }
 
 
-    private static void setStatement() {
-        Font theFont = Font.font("Helvetica", FontWeight.BOLD, 24);
-        graphicsContext.setFont(theFont);
-        graphicsContext.setStroke(Color.BLACK);
-        graphicsContext.setLineWidth(1);
 
-
-        graphicsContext.fillText("X: " + (int)actualPositionW, 1200, 50);
-        graphicsContext.fillText("Y: " + (int)actualPositionH, 1350, 50);
-
-        graphicsContext.fillText("Output:", 1200, 150);
-    }
-
-    private static void conveyorAnimated() {
-        graphicsContext.drawImage(conveyor, 5, conveyorPos - 600);
-        graphicsContext.drawImage(conveyor, 5, conveyorPos);
-        conveyorPos = conveyorPos + 0.5;
-        graphicsContext.drawImage(cover, 5, 618);
-        if (conveyorPos >= 600) {
-            conveyorPos = 0;
-        }
-    }
 
     public static void main(String[] args) {
         launch(args);
@@ -209,11 +86,6 @@ public class Main extends Application {
     @Override
     public void start(Stage mainStage) throws Exception {
         learningStrategy = new MultipleRegression();
-
-//        for(int i = 0; i < 5; i++) {
-//            int oilRandomPoint = oilRandom.nextInt(algorithmAvailablePoints.size());
-//        }
-
 
        /* ********************************* START ALGORITHM!!!!!!!!!!! *************************************************
         a - array size (our map has 16x16)
@@ -225,8 +97,6 @@ public class Main extends Application {
 
                       a   a  sy  sx dy dx    z                       */
         // astar.test(16, 16, 0, 0, 10, 8, astarBlockedPoints);
-
-
 //        int randX = randPoints.nextInt(15);
 //        int randY = randPoints.nextInt(15);
 //
@@ -267,7 +137,6 @@ public class Main extends Application {
         astarBlockedPoints[89] = pointsForOil[21];
         oilArray[9] = 7;
         astarBlockedPoints[80] = pointsForOil[7];
-
 
 //        for(int i=0;i<10;i++) {
 //            System.out.print(oilArray[i] + "\n");
@@ -366,6 +235,8 @@ public class Main extends Application {
 
             prepareActionHandlers();
 
+
+
             graphicsContext = canvas.getGraphicsContext2D();
             loadGraphics();
 
@@ -392,7 +263,6 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
 
         // Get random spawn cases and random cases.
@@ -448,9 +318,9 @@ public class Main extends Application {
                 }
         );
 
-//        for (int i = 0; i < algorithmAvailablePoints.size(); i++) {
-//            System.out.print("X:" + algorithmAvailablePoints.get(i).getX() + " Y:" + algorithmAvailablePoints.get(i).getY() + "\n");
-//        }
+        for (int i = 0; i < algorithmAvailablePoints.size(); i++) {
+            System.out.print("X:" + algorithmAvailablePoints.get(i).getX() + " Y:" + algorithmAvailablePoints.get(i).getY() + "\n");
+        }
 
 
     }
@@ -531,7 +401,7 @@ public class Main extends Application {
 //
     }
 
-
+// Machine Learning
     private int[] findPlace() {
 //        int[] result = new int[2];
 //        result[0] = 15;

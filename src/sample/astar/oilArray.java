@@ -1,11 +1,18 @@
 package sample.astar;
 
+import javafx.scene.image.Image;
+
 import java.util.Random;
+
+import static sample.gui.map.algorithmAvailablePoints;
 
 /**
  * Created by infokomes on 03.06.16.
  */
 public class oilArray {
+
+    // Oil
+    public static Image oilSlick;
 
     // Random for oil spawns
     public static Random oilRandom = new Random();
@@ -35,5 +42,22 @@ public class oilArray {
             {14, 13}, {14, 14}, {14, 15}, {15, 0}, {15, 1}, {15, 2}, {15, 3}, {15, 4}, {15, 5}, {15, 6}, {15, 7}, {15, 8}, {15, 9}, {15, 10}, {15, 11}, {15, 12},
             {15, 13}, {15, 14}, {15, 15},
     };
+
+    // Get coordinates of oil slicks
+    public static void getOilSlickNumber() {
+
+        for(int i = 0; i < oilArray.length; i ++) {
+            for(int j = 0; j < algorithmAvailablePoints.size(); j++) {
+                if((algorithmAvailablePoints.get(j).getX() == astarBlockedPoints[80 + i][0]) &&
+                        algorithmAvailablePoints.get(j).getY() == astarBlockedPoints[80 + i][1]) {
+
+//                    System.out.print(j + "Dla: X: " + astarBlockedPoints[80 + i][0] + " Y: " + astarBlockedPoints[80 + i][1] + "\n");
+                    oilsToDraw[i] = j;
+                }
+            }
+        }
+    }
+
+
 
 }
