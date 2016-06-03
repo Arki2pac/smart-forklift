@@ -138,11 +138,52 @@ public class map {
                 }
             }
             //Set case
-            if (currentlyActiveKeys.contains("A"))
+            if (currentlyActiveKeys.contains("F1"))
             {
                 actualCase = caseOne ;
                 graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
             }
+            if (currentlyActiveKeys.contains("F2"))
+            {
+                actualCase = caseTwo ;
+                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+            }
+            if (currentlyActiveKeys.contains("F3"))
+            {
+                actualCase = caseThree ;
+                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+            }
+            if (currentlyActiveKeys.contains("F4"))
+            {
+                actualCase = caseFour ;
+                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+            }
+            if (currentlyActiveKeys.contains("F5"))
+            {
+                actualCase = caseFive ;
+                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+            }
+            if (currentlyActiveKeys.contains("F6"))
+            {
+                actualCase = caseSix ;
+                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+            }
+            if (currentlyActiveKeys.contains("F7"))
+            {
+                actualCase = caseSeven ;
+                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+            }
+            if (currentlyActiveKeys.contains("F8"))
+            {
+                actualCase = caseEight ;
+                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+            }
+            if (currentlyActiveKeys.contains("F9"))
+            {
+                actualCase = null;
+                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+            }
+
 
     }
 }
