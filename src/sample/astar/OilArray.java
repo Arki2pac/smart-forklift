@@ -4,12 +4,12 @@ import javafx.scene.image.Image;
 
 import java.util.Random;
 
-import static sample.gui.map.algorithmAvailablePoints;
+import static sample.gui.Gui.algorithmAvailablePoints;
 
 /**
  * Created by infokomes on 03.06.16.
  */
-public class oilArray {
+public class OilArray {
 
     // Oil
     public static Image oilSlick;

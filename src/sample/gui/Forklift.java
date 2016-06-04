@@ -5,23 +5,23 @@ import javafx.scene.image.Image;
 /**
  * Created by infokomes on 03.06.16.
  */
-public class forklift {
+public class Forklift {
 
     // Forklifts
     public static Image forklift;
     public static Image forklift2;
 
-    // actual case on forklift
+    // actual case on Forklift
     public static Image actualCase;
     public  static int locOfCases[] = new int[20];
 
-    // forklift Speed
+    // Forklift Speed
     public static int movingTicks = 3;
 
-    // state if forklift is busy
+    // state if Forklift is busy
     public static Boolean caseNotToSpawn = false;
 
-    // number of case that is on forklift
+    // number of case that is on Forklift
     public static int numberOfCase;
 
 }

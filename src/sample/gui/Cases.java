@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * Created by infokomes on 03.06.16.
  */
-public class cases {
+public class Cases {
 
     // Cases
     public static Image caseOne;
@@ -21,7 +21,7 @@ public class cases {
 
     public static double casePoints[][] = new double[80][2];
 
-    // Randoms for cases-spawns
+    // Randoms for Cases-spawns
     public static Random caseSpawn = new Random();
     public static Random caseNumber = new Random();
     public static Image casesToSpawn[] = new Image[20];

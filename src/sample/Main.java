@@ -16,11 +16,11 @@ import sample.astar.*;
 import sample.MachineLearning.*;
 
 import static sample.Controller.prepareActionHandlers;
-import static sample.astar.oilArray.*;
-import static sample.gui.graphic.*;
-import static sample.gui.map.*;
-import static sample.gui.cases.*;
-import static sample.gui.forklift.*;
+import static sample.astar.OilArray.*;
+import static sample.gui.Graphic.*;
+import static sample.gui.Gui.*;
+import static sample.gui.Cases.*;
+import static sample.gui.Forklift.*;
 
 
 public class Main extends Application {
@@ -41,7 +41,7 @@ public class Main extends Application {
     static LearningStrategy learningStrategy;
     static int fieldNumber[] = new int[100];
 
-    // Random for algorithm cases
+    // Random for algorithm Cases
     static Random randPoints = new Random();
 
     // Boolean for pathfinding (true if came back, false if still walking)
@@ -49,7 +49,7 @@ public class Main extends Application {
 
     public int iterator = 0;
 
-    // Get cases that algorithm returns [x,y] and change them to map cases for example [ 15,15 ] -> 255
+    // Get Cases that algorithm returns [x,y] and change them to Gui Cases for example [ 15,15 ] -> 255
     private static void getFieldNumber() {
         int it = 0;
         for (int i = astar.pathXY.size() - 1; i >= 0; i--) {
@@ -84,12 +84,12 @@ public class Main extends Application {
         learningStrategy = new MultipleRegression();
 
        /* ********************************* START ALGORITHM!!!!!!!!!!! *************************************************
-        a - array size (our map has 16x16)
+        a - array size (our Gui has 16x16)
         sy - start point y
         sx - start point x
         dy - destination point y
         dx - destination point x
-        z - array with blocked cases
+        z - array with blocked Cases
 
                       a   a  sy  sx dy dx    z                       */
         // astar.test(16, 16, 0, 0, 10, 8, astarBlockedPoints);
@@ -105,11 +105,11 @@ public class Main extends Application {
 //        for(int i = 0; i < 10; i++) {
 //
 //            int randOil = oilRandom.nextInt(pointsForOil.length);
-////            while(!contains(oilArray, randOil)) {
+////            while(!contains(OilArray, randOil)) {
 ////
 ////                randOil = oilRandom.nextInt(pointsForOil.length) - 1;
 ////            }
-//            oilArray[i] = randOil;
+//            OilArray[i] = randOil;
 //            astarBlockedPoints[80 + i] = pointsForOil[randOil];
 //
 //        }
@@ -135,7 +135,7 @@ public class Main extends Application {
         astarBlockedPoints[80] = pointsForOil[7];
 
 //        for(int i=0;i<10;i++) {
-//            System.out.print(oilArray[i] + "\n");
+//            System.out.print(OilArray[i] + "\n");
 //        }
 //        System.out.print(astarBlockedPoints[71][0] + " " + astarBlockedPoints[71][1]);
 
@@ -178,7 +178,7 @@ public class Main extends Application {
         Map<String, List<String>> knowledgeBase = Main.knowledgeBase.getKnowledgeBase();
         //System.out.println(knowledgeBase.toString());
 
-        // Declare random case spawn-cases
+        // Declare random case spawn-Cases
 
 //        for (int n = 0; n < 73; n += 8) casePoints[n][0] = 156.0;
 //        for (int n = 1; n < 74; n += 8) casePoints[n][0] = 210.0;
@@ -261,7 +261,7 @@ public class Main extends Application {
         }
 
 
-        // Get random spawn cases and random cases.
+        // Get random spawn Cases and random Cases.
         IntStream.range(0, 20).forEach(
                 n -> {
                     int i = 0;

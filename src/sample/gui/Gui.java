@@ -11,20 +11,20 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
 
-import static sample.astar.oilArray.oilArray;
-import static sample.astar.oilArray.oilSlick;
-import static sample.astar.oilArray.oilsCoordinates;
-import static sample.gui.forklift.*;
-import static sample.gui.forklift.forklift;
-import static sample.gui.graphic.background;
+import static sample.astar.OilArray.oilArray;
+import static sample.astar.OilArray.oilSlick;
+import static sample.astar.OilArray.oilsCoordinates;
+import static sample.gui.Forklift.*;
+import static sample.gui.Forklift.forklift;
+import static sample.gui.Graphic.background;
 
-import static sample.gui.cases.*;
+import static sample.gui.Cases.*;
 
 
 /**
  * Created by infokomes on 03.06.16.
  */
-public class map {
+public class Gui {
 
     public  static ExecutorService mainPool = Executors.newFixedThreadPool(1);
     public  static ExecutorService pool = Executors.newFixedThreadPool(1);
@@ -67,12 +67,12 @@ public class map {
                                     (Math.pow((actualPositionW - casePoints[locOfCases[n]][0]),
                                             2)));
 
-                    // if distance of forklift and case is greater than 30 draw all random cases
+                    // if distance of Forklift and case is greater than 30 draw all random Cases
                     if (distance > 55) {
                         graphicsContext.drawImage(casesToSpawn[n], casePoints[locOfCases[n]][0],
                                 casePoints[locOfCases[n]][1]);
 
-                        // if distance of forklift and case < 30 change state that forklift is busy
+                        // if distance of Forklift and case < 30 change state that Forklift is busy
                     } else if (distance < 55 && unlockPack) {
                         caseNotToSpawn = true;
                         numberOfCase = n;
@@ -81,7 +81,7 @@ public class map {
                     if (casesToSpawn[numberOfCase] != null && unlockPack) {
                         actualCase = casesToSpawn[numberOfCase];
                     }
-                    // if forklift is busy draw case on the forklift
+                    // if Forklift is busy draw case on the Forklift
                     if (caseNotToSpawn == true && unlockPack) {
                         graphicsContext.drawImage(actualCase, actualPositionW + 10, actualPositionH);
                     }
@@ -91,7 +91,7 @@ public class map {
         // delete case from bookstand
         casesToSpawn[numberOfCase] = null;
 
-        // if the forklift approaches the tape, we remove the pack
+        // if the Forklift approaches the tape, we remove the pack
         if (actualPositionW <= 60) {
             caseNotToSpawn = false;
             actualCase = null;

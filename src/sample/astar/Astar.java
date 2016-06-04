@@ -218,7 +218,7 @@ public class Astar {
             setOilCost(blocked[i][0], blocked[i][1]);
         }
 
-        //Display initial map
+        //Display initial Gui
 //        System.out.println("Grid: ");
         for (int i = 0; i < x; ++i) {
             for (int j = 0; j < y; ++j) {
@@ -238,7 +238,7 @@ public class Astar {
         AStar();
         System.out.println("\nMap with values: ");
 
-        // Fill the map with costs
+        // Fill the Gui with costs
         for (int i = 0; i < x; ++i) {
             for (int j = 0; j < x; ++j) {
                 if (grid[i][j] != null) System.out.printf("%-3d ", grid[i][j].finalCost);

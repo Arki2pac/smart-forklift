@@ -5,15 +5,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import static sample.astar.oilArray.*;
-import static sample.gui.map.*;
-import static sample.gui.cases.*;
-import static sample.gui.forklift.*;
+import static sample.astar.OilArray.*;
+import static sample.gui.Gui.*;
+import static sample.gui.Cases.*;
+import static sample.gui.Forklift.*;
 
 /**
  * Created by infokomes on 03.06.16.
  */
-public class graphic {
+public class Graphic {
 
     // Etc
     public static Image background;

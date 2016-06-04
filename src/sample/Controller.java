@@ -1,11 +1,6 @@
 package sample;
 
-import javafx.scene.image.Image;
-import static sample.astar.oilArray.*;
-import static sample.gui.graphic.*;
-import static sample.gui.map.*;
-import static sample.gui.cases.*;
-import static sample.gui.forklift.*;
+import static sample.gui.Gui.*;
 
 public class Controller {
 
