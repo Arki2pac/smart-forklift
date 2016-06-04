@@ -5,12 +5,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.*;
@@ -399,6 +395,10 @@ public class Main extends Application {
         int random = new Random().nextInt(7);
 //        if (random == 0)
 //
+    }
+    private  int  findPlaces() {
+        int places = 1;
+        return  places;
     }
 
 // Machine Learning

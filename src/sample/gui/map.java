@@ -140,6 +140,9 @@ public class map {
             //Set case
             if (currentlyActiveKeys.contains("F1"))
             {
+                //skrzynka = ....
+//                rodzaj polki = regresion();
+                // actual case = skrzynka
                 actualCase = caseOne ;
                 graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
             }
