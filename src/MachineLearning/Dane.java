@@ -9,44 +9,45 @@ import java.util.Scanner;
 public class Dane {
 
     public double objetosc = 0.0;
-    public double kolor = 0.0;
+    public double Rodzaj = 0.0;
     public double waga = 0.0;
-    public double latwopalne = 0.0;
+    public double special = 0.0;
 
     public double numerPolki = 0.0;
 
     ZapisOdczytZPliku zapisOdczytZPliku = new ZapisOdczytZPliku();
 
-    public double getObjetosc() {
-        return objetosc;
+
+    public double getRodzaj() {
+        return Rodzaj;
     }
 
-    public double getKolor() {
-        return kolor;
+    public void setRodzaj(double rodzaj) {
+        Rodzaj = rodzaj;
+    }
+
+    public double getObjetosc() {
+        return objetosc;
     }
 
     public double getWaga() {
         return waga;
     }
 
-    public double getLatwopalne() {
-        return latwopalne;
+    public double getSpecial() {
+        return special;
     }
 
     public void setObjetosc(double objetosc) {
         this.objetosc = objetosc;
     }
 
-    public void setKolor(double kolor) {
-        this.kolor = kolor;
-    }
-
     public void setWaga(double waga) {
         this.waga = waga;
     }
 
-    public void setLatwopalne(double latwopalne) {
-        this.latwopalne = latwopalne;
+    public void setSpecial(double special) {
+        this.special = special;
     }
 
     public void setNumerPolki(double numerPolki) {
@@ -75,15 +76,15 @@ public class Dane {
         System.out.println("Podaj objętość paczki:");
         setObjetosc(in.nextDouble());
         zapisOdczytZPliku.zapisDoPlikuCech(getObjetosc());
-        System.out.println("Podaj kolor paczki:");
-        setKolor(in.nextDouble());
-        zapisOdczytZPliku.zapisDoPlikuCech(getKolor());
+        System.out.println("Podaj rodzaj produktu:");
+        setRodzaj(in.nextDouble());
+        zapisOdczytZPliku.zapisDoPlikuCech(getRodzaj());
         System.out.println("Podaj wagę paczki:");
         setWaga(in.nextDouble());
         zapisOdczytZPliku.zapisDoPlikuCech(getWaga());
-        System.out.println("Czy paczka posiada rzeczy łatwopalne?");
-        setLatwopalne(in.nextDouble());
-        zapisOdczytZPliku.zapisDoPlikuCech(getLatwopalne());
+        System.out.println("Podaj inforamcje extra");
+        setSpecial(in.nextDouble());
+        zapisOdczytZPliku.zapisDoPlikuCech(getSpecial());
         System.out.println("Podaj numer półki");
         setNumerPolki(in.nextDouble());
         zapisOdczytZPliku.zapisDoPlikuCech(getNumerPolki());
