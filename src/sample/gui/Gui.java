@@ -88,8 +88,8 @@ public class Gui {
                 }
         );
 
-        // delete case from bookstand
-        casesToSpawn[numberOfCase] = null;
+//        // delete case from bookstand
+//        casesToSpawn[numberOfCase] = null;
 
         // if the Forklift approaches the tape, we remove the pack
         if (actualPositionW <= 60) {

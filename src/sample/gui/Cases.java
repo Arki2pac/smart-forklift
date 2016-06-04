@@ -24,7 +24,15 @@ public class Cases {
     // Randoms for Cases-spawns
     public static Random caseSpawn = new Random();
     public static Random caseNumber = new Random();
-    public static Image casesToSpawn[] = new Image[20];
+    public static Image casesToSpawn[] = new Image[80];
+
+    //Random Cases
+    public static boolean contains(int[] arr, int targetValue) {
+        for (int s : arr) {
+            if (s == targetValue) return true;
+        }
+        return false;
+    }
 
     public static int[][] casesCoordinates = {
             {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0}, {10, 0}, {11, 0}, {12, 0},

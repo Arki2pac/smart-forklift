@@ -25,30 +25,23 @@ import static sample.gui.Forklift.*;
 
 public class Main extends Application {
 
-    static int[] tempArray = new int[20];
+    static int[] tempArray = new int[80];
     // Mouse events
     static double mouseX = 0.0;
     static double mouseY = 0.0;
-
     //Map
     static Map<Integer, AstarPoints> multiplePoints = new HashMap<Integer, AstarPoints>();
-
     //KnowledgeBase
     static KnowledgeBase knowledgeBase;
-
     //Strategies
     static Astar astar;
     static LearningStrategy learningStrategy;
     static int fieldNumber[] = new int[100];
-
     // Random for algorithm Cases
     static Random randPoints = new Random();
-
     // Boolean for pathfinding (true if came back, false if still walking)
     static boolean didComeBack = false;
-
     public int iterator = 0;
-
     // Get Cases that algorithm returns [x,y] and change them to Gui Cases for example [ 15,15 ] -> 255
     private static void getFieldNumber() {
         int it = 0;
@@ -78,7 +71,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
     @Override
     public void start(Stage mainStage) throws Exception {
         learningStrategy = new MultipleRegression();
@@ -134,29 +126,6 @@ public class Main extends Application {
         oilArray[9] = 7;
         astarBlockedPoints[80] = pointsForOil[7];
 
-//        for(int i=0;i<10;i++) {
-//            System.out.print(OilArray[i] + "\n");
-//        }
-//        System.out.print(astarBlockedPoints[71][0] + " " + astarBlockedPoints[71][1]);
-
-
-        int randCasePoint = randPoints.nextInt(80);
-        //random
-//        astar.test(16, 16, 0, 0, casesCoordinates[randCasePoint][0], casesCoordinates[randCasePoint][1], astarBlockedPoints);
-
-        //scenario 1
-        //  astar.test(16,16,0,0,15,15,astarBlockedPoints);
-
-        //scenrio 2
-//        astar.test(16,16,0,0,12,8,astarBlockedPoints);
-
-        //scenario 3
-//        astar.test(16,16,0,0,4,15,astarBlockedPoints);
-
-        //scenario 4 not possible
-        //  astar.test(16,16,0,0,3,2,astarBlockedPoints);
-
-
         prepareKnowledgeBase();
 
         int x = 0;
@@ -188,33 +157,33 @@ public class Main extends Application {
 //        for (int n = 5; n < 78; n += 8) casePoints[n][0] = 525.5;
 //        for (int n = 6; n < 79; n += 8) casePoints[n][0] = 629.0;
 //        for (int n = 7; n < 80; n += 8) casePoints[n][0] = 682.0;
-        // Y
+//         Y
 
-        IntStream.range(0, 80).forEach(
-                n -> {
-                    if (n < 8) {
-                        casePoints[n][1] = 156.0;
-                    } else if (n > 7 && n < 16) {
-                        casePoints[n][1] = 195.0;
-                    } else if (n > 15 && n < 24) {
-                        casePoints[n][1] = 247.0;
-                    } else if (n > 23 && n < 32) {
-                        casePoints[n][1] = 282.0;
-                    } else if (n > 31 && n < 40) {
-                        casePoints[n][1] = 340.0;
-                    } else if (n > 39 && n < 48) {
-                        casePoints[n][1] = 372.0;
-                    } else if (n > 47 && n < 56) {
-                        casePoints[n][1] = 429.0;
-                    } else if (n > 55 && n < 64) {
-                        casePoints[n][1] = 466.0;
-                    } else if (n > 63 && n < 72) {
-                        casePoints[n][1] = 519.0;
-                    } else if (n > 71 && n < 80) {
-                        casePoints[n][1] = 554.0;
-                    }
-                }
-        );
+//        IntStream.range(0, 80).forEach(
+//                n -> {
+//                    if (n < 8) {
+//                        casePoints[n][1] = 156.0;
+//                    } else if (n > 7 && n < 16) {
+//                        casePoints[n][1] = 195.0;
+//                    } else if (n > 15 && n < 24) {
+//                        casePoints[n][1] = 247.0;
+//                    } else if (n > 23 && n < 32) {
+//                        casePoints[n][1] = 282.0;
+//                    } else if (n > 31 && n < 40) {
+//                        casePoints[n][1] = 340.0;
+//                    } else if (n > 39 && n < 48) {
+//                        casePoints[n][1] = 372.0;
+//                    } else if (n > 47 && n < 56) {
+//                        casePoints[n][1] = 429.0;
+//                    } else if (n > 55 && n < 64) {
+//                        casePoints[n][1] = 466.0;
+//                    } else if (n > 63 && n < 72) {
+//                        casePoints[n][1] = 519.0;
+//                    } else if (n > 71 && n < 80) {
+//                        casePoints[n][1] = 554.0;
+//                    }
+//                }
+//        );
 
 
         try {
@@ -224,25 +193,15 @@ public class Main extends Application {
             //   Group root = new Group();
             mainScene = new Scene(page);
             mainStage.setScene(mainScene);
-
             Canvas canvas = new Canvas(WIDTH, HEIGHT);
-
             page.getChildren().add(canvas);
-
             prepareActionHandlers();
-
-
-
             graphicsContext = canvas.getGraphicsContext2D();
             loadGraphics();
-
             getFieldNumber();
-//            astar.test(16,16,0,0,15,15,astarBlockedPoints);
-
             /**
              * Main "game" loop
              */
-
             setCase();
 
             new AnimationTimer() {
@@ -260,14 +219,20 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
+//Spawn
+        casePoints[0][0] = 156.0;       //X
+        casePoints[0][1] = 156.0;       //Y
+        casesToSpawn[0] = caseOne;      //Img
 
-        // Get random spawn Cases and random Cases.
+        casePoints[1][0] = 206.0;
+        casePoints[1][1] = 156.0;
+        casesToSpawn[1] = caseTwo;
+
         IntStream.range(0, 20).forEach(
                 n -> {
                     int i = 0;
                     int k = caseSpawn.nextInt(79) + 1;
                     boolean temp = true;
-
                     while (temp == true) {
                         if (!contains(tempArray, k)) {
                             tempArray[n] = k;
@@ -275,56 +240,76 @@ public class Main extends Application {
                             temp = false;
                         } else {
                             k = caseSpawn.nextInt(79) + 1;
-
                         }
                     }
-                    int j = caseNumber.nextInt(8) + 1;
-
-                    switch (j) {
-                        case 1:
-                            casesToSpawn[n] = caseOne;
-                            break;
-                        case 2:
-                            casesToSpawn[n] = caseTwo;
-                            break;
-                        case 3:
-                            casesToSpawn[n] = caseThree;
-                            break;
-                        case 4:
-                            casesToSpawn[n] = caseFour;
-                            break;
-                        case 5:
-                            casesToSpawn[n] = caseFive;
-                            break;
-                        case 6:
-                            casesToSpawn[n] = caseSix;
-                            break;
-                        case 7:
-                            casesToSpawn[n] = caseSeven;
-                            break;
-                        case 8:
-                            casesToSpawn[n] = caseEight;
-                            break;
-                        default:
-                            casesToSpawn[n] = caseOne;
-                            break;
-                    }
-                    locOfCases[n] = i;
-
+                    locOfCases[n] = n;
                 }
         );
 
-        for (int i = 0; i < algorithmAvailablePoints.size(); i++) {
-            System.out.print("X:" + algorithmAvailablePoints.get(i).getX() + " Y:" + algorithmAvailablePoints.get(i).getY() + "\n");
-        }
+//        graphicsContext.drawImage(caseOne, 140,140);
+//        for(int i=0; i < 20; i++ ){casesToSpawn[i] = caseOne;}
 
+        // Get random spawn Cases and random Cases.
+//        IntStream.range(0, 20).forEach(
+//                n -> {
+//                    int i = 0;
+//                    int k = caseSpawn.nextInt(79) + 1;
+//                    boolean temp = true;
+//                    while (temp == true) {
+//                        if (!contains(tempArray, k)) {
+//                            tempArray[n] = k;
+//                            i = k;
+//                            temp = false;
+//                        } else {
+//                            k = caseSpawn.nextInt(79) + 1;
+//
+//                        }
+//                    }
+//                    int j = caseNumber.nextInt(8) + 1;
+//
+//                    switch (j) {
+//                        case 1:
+//                            casesToSpawn[n] = caseOne;
+//                            break;
+//                        case 2:
+//                            casesToSpawn[n] = caseTwo;
+//                            break;
+//                        case 3:
+//                            casesToSpawn[n] = caseThree;
+//                            break;
+//                        case 4:
+//                            casesToSpawn[n] = caseFour;
+//                            break;
+//                        case 5:
+//                            casesToSpawn[n] = caseFive;
+//                            break;
+//                        case 6:
+//                            casesToSpawn[n] = caseSix;
+//                            break;
+//                        case 7:
+//                            casesToSpawn[n] = caseSeven;
+//                            break;
+//                        case 8:
+//                            casesToSpawn[n] = caseEight;
+//                            break;
+//                        default:
+//                            casesToSpawn[n] = caseOne;
+//                            break;
+//                    }
+//                    locOfCases[n] = i;
+//
+//                }
+//        );
 
+//        for (int i = 0; i < algorithmAvailablePoints.size(); i++) {
+//            System.out.print("X:" + algorithmAvailablePoints.get(i).getX() + " Y:" + algorithmAvailablePoints.get(i).getY() + "\n");
+//        }
     }
 
     private void prepareMultiplePoints() {
         AstarPoints.prepareMultiplePoints(multiplePoints);
     }
-
+    //Wiedza
     private void prepareKnowledgeBase() {
         knowledgeBase = new KnowledgeBase();
         knowledgeBase.addData("car parts", "gray");
@@ -362,17 +347,60 @@ public class Main extends Application {
         knowledgeBase.addData("glass", "solid");
     }
 
-    private void setCase() {
-        mainScene.addEventHandler(MouseEvent.MOUSE_RELEASED,
-                mouseEvent -> mouseClicked());
+    // Moving
 
+    private double calculateXIterator() {
+        return (multiplePoints.get(fieldNumber[iterator]).getX() - actualPositionW) / movingTicks;
+    }
+    private double calculateYIterator() {
+        return (multiplePoints.get(fieldNumber[iterator]).getY() - actualPositionH) / movingTicks;
+    }
+    private void waitUntilRunThreadFinishes(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    private Runnable prepareRunableForMovingSlowly(double xIterator, double yIterator) {
+        return () -> {
+            for (int i = 0; i < movingTicks; i++) {
+                actualPositionW += xIterator;
+                actualPositionH += yIterator;
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+    }
+    private void move() {
+        double xIterator = calculateXIterator();
+        double yIterator = calculateYIterator();
+        Runnable runnable = prepareRunableForMovingSlowly(xIterator, yIterator);
+        pool.execute(runnable);
+
+        waitUntilRunThreadFinishes(100 * movingTicks);
+    }
+    private void handleGoingForPackage() {
+        iterator++;
+        move();
+    }
+    private void handleReturning() {
+        if (iterator >= 0 && returnMode) {
+            iterator--;
+            move();
+        }
     }
 
     private void mouseClicked() {
         mainPool.execute(() -> {
 //            getRandomCase();
             int[] destinationXY = findPlace();
-            astar.test(16,16,0,0,destinationXY[0],destinationXY[1],astarBlockedPoints);
+            int randCasePoint = randPoints.nextInt(80);
+            astar.test(16, 16, 0, 0, casesCoordinates[randCasePoint][0], casesCoordinates[randCasePoint][1], astarBlockedPoints);
+//            astar.test(16,16,0,0,destinationXY[0],destinationXY[1],astarBlockedPoints);
             getFieldNumber();
 
             while (iterator < astar.pathXY.size() - 1) {
@@ -390,12 +418,18 @@ public class Main extends Application {
             }
         });
     }
+    private void setCase() {
+        mainScene.addEventHandler(MouseEvent.MOUSE_RELEASED,
+                mouseEvent -> mouseClicked());
+    }
+
+// End Moving
 
     private void getRandomCase() {
         int random = new Random().nextInt(7);
 //        if (random == 0)
-//
     }
+
     private  int  findPlaces() {
         int places = 1;
         return  places;
@@ -403,72 +437,9 @@ public class Main extends Application {
 
 // Machine Learning
     private int[] findPlace() {
-//        int[] result = new int[2];
-//        result[0] = 15;
-//        result[1] = 15;
-//        return result;
-//        String caseName = "glass";
         String caseName = "explosives";
-//        String caseName = "oil";
-//        String caseName = "wood";
         return learningStrategy.findDestinationPlace(knowledgeBase, caseName);
     }
 
-    private void handleGoingForPackage() {
-        iterator++;
-        move();
-    }
 
-    private void move() {
-        double xIterator = calculateXIterator();
-        double yIterator = calculateYIterator();
-        Runnable runnable = prepareRunableForMovingSlowly(xIterator, yIterator);
-        pool.execute(runnable);
-
-        waitUntilRunThreadFinishes(100 * movingTicks);
-    }
-
-    private void waitUntilRunThreadFinishes(int millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private double calculateXIterator() {
-        return (multiplePoints.get(fieldNumber[iterator]).getX() - actualPositionW) / movingTicks;
-    }
-
-    private double calculateYIterator() {
-        return (multiplePoints.get(fieldNumber[iterator]).getY() - actualPositionH) / movingTicks;
-    }
-
-    private Runnable prepareRunableForMovingSlowly(double xIterator, double yIterator) {
-        return () -> {
-            for (int i = 0; i < movingTicks; i++) {
-                actualPositionW += xIterator;
-                actualPositionH += yIterator;
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-    }
-
-    private void handleReturning() {
-        if (iterator >= 0 && returnMode) {
-            iterator--;
-            move();
-        }
-    }
-
-    public static boolean contains(int[] arr, int targetValue) {
-        for (int s : arr) {
-            if (s == targetValue) return true;
-        }
-        return false;
-    }
 }

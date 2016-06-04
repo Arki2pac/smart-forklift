@@ -13,7 +13,7 @@ public class Forklift {
 
     // actual case on Forklift
     public static Image actualCase;
-    public  static int locOfCases[] = new int[20];
+    public  static int locOfCases[] = new int[80];
 
     // Forklift Speed
     public static int movingTicks = 3;
