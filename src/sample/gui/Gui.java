@@ -2,11 +2,13 @@ package sample.gui;
 
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import sample.KnowledgeBase;
 import sample.astar.AstarPoints;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
@@ -19,6 +21,8 @@ import static sample.gui.Forklift.forklift;
 import static sample.gui.Graphic.background;
 
 import static sample.gui.Cases.*;
+import static sample.Main.*;
+import static sample.gui.Graphic.*;
 
 
 /**
@@ -45,7 +49,8 @@ public class Gui {
     public static double actualPositionH = 0;
     public static double actualPositionW = 110;
     public static double conveyorPos = 0.0;
-
+    static int randj;
+    static Random generator = new Random();
 
     public static void tickAndRender() {
         // clear canvas
@@ -68,7 +73,7 @@ public class Gui {
                                             2)));
 
                     // if distance of Forklift and case is greater than 30 draw all random Cases
-                    if (distance > 55) {
+                    if (distance != -10000) {
                         graphicsContext.drawImage(casesToSpawn[n], casePoints[locOfCases[n]][0],
                                 casePoints[locOfCases[n]][1]);
 
@@ -78,9 +83,9 @@ public class Gui {
                         numberOfCase = n;
 
                     }
-                    if (casesToSpawn[numberOfCase] != null && unlockPack) {
-                        actualCase = casesToSpawn[numberOfCase];
-                    }
+//                    if (casesToSpawn[numberOfCase] != null && unlockPack) {
+//                        actualCase = null;
+//                    }
                     // if Forklift is busy draw case on the Forklift
                     if (caseNotToSpawn == true && unlockPack) {
                         graphicsContext.drawImage(actualCase, actualPositionW + 10, actualPositionH);
@@ -101,6 +106,18 @@ public class Gui {
 
         graphicsContext.drawImage(forklift, actualPositionW, actualPositionH);
 
+        if (currentlyActiveKeys.contains("R"))
+        {
+            randj = generator.nextInt(100) + 1;
+            RandTypeCase = randj % knowledgeBase.getKnowledgeBase().size();
+            for (int i = 0; i < 4; i++){
+                ActualPropertiesName[i] = knowledgeBase.getKnowledgeBase().get(RandCaseName[RandTypeCase]).get(i);
+            }
+//            setStatement();
+
+        }
+
+   //To Tests
             // Arrow keys moving
             if (currentlyActiveKeys.contains("LEFT"))
             {
@@ -161,31 +178,24 @@ public class Gui {
                 actualCase = caseFour ;
                 graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
             }
-            if (currentlyActiveKeys.contains("F5"))
+
+            if (currentlyActiveKeys.contains("A"))
             {
-                actualCase = caseFive ;
-                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+                TypeRegal = 1;
             }
-            if (currentlyActiveKeys.contains("F6"))
+            if (currentlyActiveKeys.contains("S"))
             {
-                actualCase = caseSix ;
-                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+                TypeRegal = 2;
             }
-            if (currentlyActiveKeys.contains("F7"))
+            if (currentlyActiveKeys.contains("D"))
             {
-                actualCase = caseSeven ;
-                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+                TypeRegal = 3;
             }
-            if (currentlyActiveKeys.contains("F8"))
+            if (currentlyActiveKeys.contains("F"))
             {
-                actualCase = caseEight ;
-                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+                TypeRegal = 4;
             }
-            if (currentlyActiveKeys.contains("F9"))
-            {
-                actualCase = null;
-                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
-            }
+
 
 
     }

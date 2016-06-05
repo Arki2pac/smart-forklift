@@ -18,7 +18,7 @@ public class Start {
     public static void main(String[] args) {
 
         //  startAlgorithm(BLACK_AREA);
-        // startAlgorithm(BLUE_AREA);
+         startAlgorithm(BLUE_AREA);
 
 
     }
