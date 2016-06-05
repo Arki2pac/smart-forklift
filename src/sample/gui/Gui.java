@@ -1,10 +1,13 @@
 package sample.gui;
 
+import MachineLearning.Main;
+import MachineLearning.RegresjaWielowymiarowa;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import sample.KnowledgeBase;
 import sample.astar.AstarPoints;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -52,7 +55,7 @@ public class Gui {
     static int randj;
     static Random generator = new Random();
 
-    public static void tickAndRender() {
+    public static void tickAndRender() throws IOException {
         // clear canvas
         graphicsContext.clearRect(0, 0, WIDTH, HEIGHT);
         graphicsContext.drawImage(background, 0, 0);
@@ -108,12 +111,56 @@ public class Gui {
 
         if (currentlyActiveKeys.contains("R"))
         {
-            randj = generator.nextInt(100) + 1;
-            RandTypeCase = randj % knowledgeBase.getKnowledgeBase().size();
+            randj = generator.nextInt(100);
+            RandTypeCase = randj % (knowledgeBase.getKnowledgeBase().size()-1);
             for (int i = 0; i < 4; i++){
                 ActualPropertiesName[i] = knowledgeBase.getKnowledgeBase().get(RandCaseName[RandTypeCase]).get(i);
             }
-//            setStatement();
+            for (int i = 0; i < 4; i++){
+                ActualPropertiesNameInt[i] = Integer.valueOf(knowledgeBaseInt.getKnowledgeBase().get(RandCaseName[RandTypeCase]).get(i));
+            }
+
+            switch (ActualPropertiesNameInt[0]) {
+                case 1:
+                    TypeCase = 1; // Metal
+                    break;
+                case 2:
+                    TypeCase = 2; // Paper
+                    break;
+                case 3:
+                    TypeCase = 3; // Gas
+                    break;
+                case 4:
+                    TypeCase = 4; // Wood
+                    break;
+            }
+
+            if(ActualPropertiesNameInt[3] == 1){
+                TypeCase = 5; // Flameable
+            }
+            if(ActualPropertiesNameInt[3] == 2){
+                TypeCase = 6; // Cool
+            }
+
+            ShowActualCase(TypeCase);
+        }
+
+        if (currentlyActiveKeys.contains("G")){
+            TypeRegal =  Regression(ActualPropertiesNameInt[0],ActualPropertiesNameInt[1],ActualPropertiesNameInt[2],ActualPropertiesNameInt[3]);
+            switch (TypeRegal) {
+                case 1:
+                    RegalTypeName = "Regal 1";
+                    break;
+                case 2:
+                    RegalTypeName = "Regal 2";
+                    break;
+                case 3:
+                    RegalTypeName = "Regal 3";
+                    break;
+                case 4:
+                    RegalTypeName = "Regal 4";
+                    break;
+            }
 
         }
 

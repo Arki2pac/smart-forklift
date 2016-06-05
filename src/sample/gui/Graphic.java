@@ -63,9 +63,16 @@ public class Graphic {
         graphicsContext.fillText("Actual Properities 2: "+ ActualPropertiesName[1], 1200, 200);
         graphicsContext.fillText("Actual Properities 3: "+ ActualPropertiesName[2], 1200, 230);
         graphicsContext.fillText("Actual Properities 4: "+ ActualPropertiesName[3], 1200, 260);
+
+        graphicsContext.fillText("Actual Properities 1: "+ ActualPropertiesNameInt[0], 1200, 300);
+        graphicsContext.fillText("Actual Properities 2: "+ ActualPropertiesNameInt[1], 1200, 330);
+        graphicsContext.fillText("Actual Properities 3: "+ ActualPropertiesNameInt[2], 1200, 360);
+        graphicsContext.fillText("Actual Properities 4: "+ ActualPropertiesNameInt[3], 1200, 390);
+
         graphicsContext.setFont(theFont);
-        graphicsContext.fillText("Actual CaseType: "+ CaseTypeName, 1200, 300);
-        graphicsContext.fillText("Actual RegalType: "+ RegalTypeName, 1200, 350);
+        graphicsContext.fillText("Actual CaseType: "+ CaseTypeName, 1200, 440);
+        graphicsContext.fillText("Actual RegalType: "+ RegalTypeName, 1200, 480);
+
     }
 
     public static void conveyorAnimated() {

@@ -70,4 +70,10 @@ public class RegresjaWielowymiarowa{
             System.out.println("Oryginał: " +y[i] + " || Po regresji: " + wartość[i] + " || Po przybliżeniu: " + przyblizenie);
         }
     }
+
+    public int test(double x1, double x2, double x3, double x4){
+        double polka;
+        polka = beta(0) + beta(1) * x1 + beta(2) * x2 + beta(3) * x3 + beta(4) * x4;
+        return (int) polka;
+    }
 }

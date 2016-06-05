@@ -1,5 +1,8 @@
 package sample;
 
+import MachineLearning.Dane;
+import MachineLearning.RegresjaWielowymiarowa;
+import MachineLearning.ZapisOdczytZPliku;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +36,7 @@ public class Main extends Application {
     static Map<Integer, AstarPoints> multiplePoints = new HashMap<Integer, AstarPoints>();
     //KnowledgeBase
     public static KnowledgeBase knowledgeBase;
+    public static KnowledgeBase knowledgeBaseInt;
     //Regals
     public static Regal regal = new Regal();
     public static Regal regal2 = new Regal();
@@ -44,8 +48,9 @@ public class Main extends Application {
     public static int TypeRegal = 1;
     public Integer[] Key = new Integer[5];
     public static int RandTypeCase;
-    public static String[] RandCaseName = new String[50];
+    public static String[] RandCaseName = new String[20];
     public static  String ActualPropertiesName[] = new String[4];
+    public static  Integer ActualPropertiesNameInt[] = new Integer[4];
     public static  String CaseTypeName = " ";
     public static  String RegalTypeName = " ";
     public static Random RandCaseInt = new Random();
@@ -58,6 +63,16 @@ public class Main extends Application {
     // Boolean for pathfinding (true if came back, false if still walking)
     static boolean didComeBack = false;
     public int iterator = 0;
+    ///Regresion
+    public static int Regression(double x1, double x2, double x3, double x4) throws IOException {
+        ZapisOdczytZPliku zapisOdczytZPliku = new ZapisOdczytZPliku();
+        Dane dane = new Dane();
+        RegresjaWielowymiarowa regresjaWielowymiarowa = new RegresjaWielowymiarowa(dane.pobranieDoTablicyCech(), dane.pobranieDoTablicywartosci());
+        regresjaWielowymiarowa.porownanie(dane.pobranieDoTablicyCech(), dane.pobranieDoTablicywartosci());
+        regresjaWielowymiarowa.read();
+//        dane.wypisanieTablic(dane.pobranieDoTablicywartosci(),dane.pobranieDoTablicyCech());
+        return regresjaWielowymiarowa.test(x1, x2, x3, x4);
+    }
     // Get Cases that algorithm returns [x,y] and change them to Gui Cases for example [ 15,15 ] -> 255
     private static void getFieldNumber() {
         int it = 0;
@@ -120,6 +135,8 @@ public class Main extends Application {
 
         prepareKnowledgeBase();
 
+
+
         //ActualPropertiesName
         for (int i = 0; i < 4; i++){
 //            ActualPropertiesName[i] = knowledgeBase.getKnowledgeBase().get(RandCaseName[1]).get(i);
@@ -167,7 +184,11 @@ public class Main extends Application {
             new AnimationTimer() {
                 public void handle(long currentNanoTime) {
 
-                    tickAndRender();
+                    try {
+                        tickAndRender();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     setStatement();
                     conveyorAnimated();
 
@@ -190,50 +211,167 @@ public class Main extends Application {
     //Wiedza
     private void prepareKnowledgeBase() {
         knowledgeBase = new KnowledgeBase();
-        knowledgeBase.addData("car parts", "gray");
-        knowledgeBase.addData("car parts", "metal");
-        knowledgeBase.addData("car parts", "heavy");
-        knowledgeBase.addData("car parts", "middleweight");
-        knowledgeBase.addData("car parts", "solid");
-        knowledgeBase.addData("wood", "brown");
-        knowledgeBase.addData("wood", "wooden");
-        knowledgeBase.addData("wood", "heavy");
-        knowledgeBase.addData("wood", "solid");
-        knowledgeBase.addData("paper", "white");
-        knowledgeBase.addData("paper", "paper");
-        knowledgeBase.addData("paper", "light");
-        knowledgeBase.addData("paper", "solid");
-        knowledgeBase.addData("explosives", "red");
-        knowledgeBase.addData("explosives", "labelled");
-        knowledgeBase.addData("explosives", "middleweight");
-        knowledgeBase.addData("explosives", "solid");
-        knowledgeBase.addData("chemicals", "black");
-        knowledgeBase.addData("chemicals", "labelled");
-        knowledgeBase.addData("chemicals", "middleweight");
-        knowledgeBase.addData("chemicals", "liquid");
-        knowledgeBase.addData("water", "blue");
-        knowledgeBase.addData("water", "metal");
-        knowledgeBase.addData("water", "heavy");
-        knowledgeBase.addData("water", "liquid");
-        knowledgeBase.addData("oil", "yellow");
-        knowledgeBase.addData("oil", "metal");
-        knowledgeBase.addData("oil", "middleweight");
-        knowledgeBase.addData("oil", "liquid");
-        knowledgeBase.addData("glass", "blue");
-        knowledgeBase.addData("glass", "transparent");
-        knowledgeBase.addData("glass", "light");
-        knowledgeBase.addData("glass", "solid");
+
+        knowledgeBase.addData("Car Parts", "Metal");
+        knowledgeBase.addData("Car Parts", "30");
+        knowledgeBase.addData("Car Parts", "30");
+        knowledgeBase.addData("Car Parts", "Normal");
+
+        knowledgeBase.addData("Wood Car Parts", "Wood");
+        knowledgeBase.addData("Wood Car Parts", "20");
+        knowledgeBase.addData("Wood Car Parts", "20");
+        knowledgeBase.addData("Wood Car Parts", "Normal");
+
+        knowledgeBase.addData("Instructions", "Paper");
+        knowledgeBase.addData("Instructions", "10");
+        knowledgeBase.addData("Instructions", "10");
+        knowledgeBase.addData("Instructions", "Flammable");
+
+        knowledgeBase.addData("Nitro", "Gas");
+        knowledgeBase.addData("Nitro", "10");
+        knowledgeBase.addData("Nitro", "20");
+        knowledgeBase.addData("Nitro", "Flammable");
+
+        knowledgeBase.addData("Azot", "Gas");
+        knowledgeBase.addData("Azot", "10");
+        knowledgeBase.addData("Azot", "20");
+        knowledgeBase.addData("Azot", "Cool");
+
+        knowledgeBase.addData("Oxygen", "Gas");
+        knowledgeBase.addData("Oxygen", "10");
+        knowledgeBase.addData("Oxygen", "20");
+        knowledgeBase.addData("Oxygen", "Normal");
+
+        knowledgeBase.addData("Ammoniac", "Gas");
+        knowledgeBase.addData("Ammoniac", "10");
+        knowledgeBase.addData("Ammoniac", "20");
+        knowledgeBase.addData("Ammoniac", "Flammable");
+
+        knowledgeBase.addData("Mercury", "Metal");
+        knowledgeBase.addData("Mercury", "30");
+        knowledgeBase.addData("Mercury", "20");
+        knowledgeBase.addData("Mercury", "Cool");
+
+        knowledgeBase.addData("Fire extinguisher", "Metal");
+        knowledgeBase.addData("Fire extinguisher", "10");
+        knowledgeBase.addData("Fire extinguisher", "10");
+        knowledgeBase.addData("Fire extinguisher", "Normal");
+
+        knowledgeBase.addData("Oil Canister", "Metal");
+        knowledgeBase.addData("Oil Canister", "10");
+        knowledgeBase.addData("Oil Canister", "20");
+        knowledgeBase.addData("Oil Canister", "Normal");
+
+        knowledgeBase.addData("Books", "Paper");
+        knowledgeBase.addData("Books", "10");
+        knowledgeBase.addData("Books", "10");
+        knowledgeBase.addData("Books", "Flammable");
+
+        knowledgeBase.addData("Notebooks", "Paper");
+        knowledgeBase.addData("Notebooks", "10");
+        knowledgeBase.addData("Notebooks", "10");
+        knowledgeBase.addData("Notebooks", "Flammable");
+
+        knowledgeBase.addData("Pine Boards", "Wood");
+        knowledgeBase.addData("Pine Boards", "20");
+        knowledgeBase.addData("Pine Boards", "20");
+        knowledgeBase.addData("Pine Boards", "Flammable");
+
+        knowledgeBase.addData("Table Parts", "Wood");
+        knowledgeBase.addData("Table Parts", "20");
+        knowledgeBase.addData("Table Parts", "20");
+        knowledgeBase.addData("Table Parts", "Normal");
+
+        knowledgeBaseInt = new KnowledgeBase();
+
+        knowledgeBaseInt.addData("Car Parts", "1");
+        knowledgeBaseInt.addData("Car Parts", "30");
+        knowledgeBaseInt.addData("Car Parts", "30");
+        knowledgeBaseInt.addData("Car Parts", "3");
+
+        knowledgeBaseInt.addData("4 Car Parts", "4");
+        knowledgeBaseInt.addData("4 Car Parts", "20");
+        knowledgeBaseInt.addData("4 Car Parts", "20");
+        knowledgeBaseInt.addData("4 Car Parts", "3");
+
+        knowledgeBaseInt.addData("Instructions", "2");
+        knowledgeBaseInt.addData("Instructions", "10");
+        knowledgeBaseInt.addData("Instructions", "10");
+        knowledgeBaseInt.addData("Instructions", "1");
+
+        knowledgeBaseInt.addData("Nitro", "3");
+        knowledgeBaseInt.addData("Nitro", "10");
+        knowledgeBaseInt.addData("Nitro", "20");
+        knowledgeBaseInt.addData("Nitro", "1");
+
+        knowledgeBaseInt.addData("Azot", "3");
+        knowledgeBaseInt.addData("Azot", "10");
+        knowledgeBaseInt.addData("Azot", "20");
+        knowledgeBaseInt.addData("Azot", "2");
+
+        knowledgeBaseInt.addData("Oxygen", "3");
+        knowledgeBaseInt.addData("Oxygen", "10");
+        knowledgeBaseInt.addData("Oxygen", "20");
+        knowledgeBaseInt.addData("Oxygen", "3");
+
+        knowledgeBaseInt.addData("Ammoniac", "3");
+        knowledgeBaseInt.addData("Ammoniac", "10");
+        knowledgeBaseInt.addData("Ammoniac", "20");
+        knowledgeBaseInt.addData("Ammoniac", "1");
+
+        knowledgeBaseInt.addData("Mercury", "1");
+        knowledgeBaseInt.addData("Mercury", "30");
+        knowledgeBaseInt.addData("Mercury", "20");
+        knowledgeBaseInt.addData("Mercury", "2");
+
+        knowledgeBaseInt.addData("Fire extinguisher", "1");
+        knowledgeBaseInt.addData("Fire extinguisher", "10");
+        knowledgeBaseInt.addData("Fire extinguisher", "10");
+        knowledgeBaseInt.addData("Fire extinguisher", "3");
+
+        knowledgeBaseInt.addData("Oil Canister", "1");
+        knowledgeBaseInt.addData("Oil Canister", "10");
+        knowledgeBaseInt.addData("Oil Canister", "20");
+        knowledgeBaseInt.addData("Oil Canister", "3");
+
+        knowledgeBaseInt.addData("Books", "2");
+        knowledgeBaseInt.addData("Books", "10");
+        knowledgeBaseInt.addData("Books", "10");
+        knowledgeBaseInt.addData("Books", "1");
+
+        knowledgeBaseInt.addData("Notebooks", "2");
+        knowledgeBaseInt.addData("Notebooks", "10");
+        knowledgeBaseInt.addData("Notebooks", "10");
+        knowledgeBaseInt.addData("Notebooks", "1");
+
+        knowledgeBaseInt.addData("Pine Boards", "4");
+        knowledgeBaseInt.addData("Pine Boards", "20");
+        knowledgeBaseInt.addData("Pine Boards", "20");
+        knowledgeBaseInt.addData("Pine Boards", "1");
+
+        knowledgeBaseInt.addData("Table Parts", "4");
+        knowledgeBaseInt.addData("Table Parts", "20");
+        knowledgeBaseInt.addData("Table Parts", "20");
+        knowledgeBaseInt.addData("Table Parts", "3");
 
         //RandCaseName
-        RandCaseName[0]="car parts";
-        RandCaseName[1]="car parts";
-        RandCaseName[2]="wood";
-        RandCaseName[3]="paper";
-        RandCaseName[4]="explosives";
-        RandCaseName[5]="chemicals";
-        RandCaseName[6]="water";
-        RandCaseName[7]="oil";
-        RandCaseName[8]="glass";
+        RandCaseName[0]="Car Parts";
+        RandCaseName[1]="Car Parts";
+        RandCaseName[2]="Wood Car Parts";
+        RandCaseName[3]="Instructions";
+        RandCaseName[4]="Nitro";
+        RandCaseName[5]="Azot";
+        RandCaseName[6]="Oxygens";
+        RandCaseName[7]="Ammoniac";
+        RandCaseName[8]="Mercury";
+        RandCaseName[9]="Fire extinguisher";
+        RandCaseName[10]="Oil Canister";
+        RandCaseName[11]="Books";
+        RandCaseName[12]="Notebooks";
+        RandCaseName[13]="Boards";
+        RandCaseName[14]="Table Parts";
+        RandCaseName[15]="Table Parts";
+
     }
 
     // Wiedza 2
@@ -652,19 +790,25 @@ public class Main extends Application {
         );
     }
 
-    private void ShowActualCase(int typecase) {
+    public static void ShowActualCase(int typecase) {
         switch (typecase) {
             case 1:
-                actualCase = caseOne;
+                actualCase = caseOne; // Metal
                 break;
             case 2:
-                actualCase = caseTwo;
+                actualCase = caseTwo; // Paper
                 break;
             case 3:
-                actualCase = caseThree;
+                actualCase = caseThree; // Gas
                 break;
             case 4:
-                actualCase = caseFour;
+                actualCase = caseFour; // Wood
+                break;
+            case 5:
+                actualCase = caseFive; // Flameable
+                break;
+            case 6:
+                actualCase = caseSix; // Cool
                 break;
         }
     }

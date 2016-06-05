@@ -18,24 +18,17 @@ public class Main {
         System.out.println();
         dane.wypisanieTablic(dane.pobranieDoTablicywartosci(),dane.pobranieDoTablicyCech());
 
-        KnowledgeBase knowledgeBase = new KnowledgeBase();
-        knowledgeBase.addData("car parts", "gray");
-        knowledgeBase.addData("car parts", "metal");
-        knowledgeBase.addData("car parts", "heavy");
-        knowledgeBase.addData("car parts", "middleweight");
-        knowledgeBase.getKnowledgeBase();
-        String ActualKey = "car parts";
-        String ActualProperties[] = new String[4];
-        Double ActualPropertiesDouble[] = new Double[4];
 
-        for (int i = 0; i < 4; i++){
-            ActualProperties[i] = knowledgeBase.getKnowledgeBase().get(ActualKey).get(i);
-            System.out.println(ActualProperties[i]);
-        }
-        Converter converter = new Converter();
-        ActualPropertiesDouble = converter.toConvert(ActualProperties);
-        for (int i = 0; i < 4; i++) {
-            System.out.println(ActualPropertiesDouble[i]);
-        }
+
+//        Integer ActualProperties[] = new Integer[4];
+//        ActualProperties[0]=1;
+//        ActualProperties[1]=30;
+//        ActualProperties[2]=30;
+//        ActualProperties[3]=3;
+//
+//        Double ActualPropertiesDouble[] = new Double[4];
+//        ActualPropertiesDouble[] = ActualProperties[];
+
+
     }
 }
