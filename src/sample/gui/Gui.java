@@ -168,6 +168,7 @@ public class Gui {
         }
 
         if (currentlyActiveKeys.contains("M")){
+
             DecisionTreeTest(ActualPropertiesNameInt[0],ActualPropertiesNameInt[1],ActualPropertiesNameInt[2],ActualPropertiesNameInt[3]);
             TypeRegal =  TreeRegal;
             switch (TypeRegal) {
