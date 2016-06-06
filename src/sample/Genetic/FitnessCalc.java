@@ -2,7 +2,7 @@ package sample.Genetic;
 
 public class FitnessCalc {
 
-    static byte[] solution = new byte[15];
+    static byte[] solution = new byte[11];
 
     // Ustaw rozwiązanie
     public static void setSolution(byte[] newSolution) {

@@ -27,15 +27,17 @@ public class Graphic {
     public static void loadGraphics() {
         forklift = new Image("img/forklift.png");
         forklift2 = new Image("img/forklift2.png");
-        background = new Image("img/background_test.png");
+        background = new Image("img/background.png");
         conveyor = new Image("img/conveyor.png");
         cover = new Image("img/cover.png");
-        caseOne = new Image("img/case1.png");
-        caseTwo = new Image("img/case2.png");
-        caseThree = new Image("img/case3.png");
-        caseFour = new Image("img/case4.png");
-        caseFive = new Image("img/case5.png");
-        caseSix = new Image("img/case6.png");
+        //Cases
+        caseOne = new Image("img/case1.png");    // Metal
+        caseTwo = new Image("img/case2.png");   // Paper
+        caseThree = new Image("img/case5.png"); //Gas
+        caseFour = new Image("img/case3.png"); //Wood
+        caseFive = new Image("img/case4.png"); //Flemable
+        caseSix = new Image("img/case6.png"); //Cool
+        //Extra
         caseSeven = new Image("img/case7.png");
         caseEight = new Image("img/case8.png");
         oilSlick = new Image("img/oil.png");
@@ -47,31 +49,31 @@ public class Graphic {
 //    }
     //Gui
     public static void setStatement() {
-        Font theFont = Font.font("Helvetica", FontWeight.BOLD, 20);
+        Font theFont = Font.font("Helvetica", FontWeight.BOLD, 16);
         graphicsContext.setFont(theFont);
         graphicsContext.setStroke(Color.BLACK);
         graphicsContext.setLineWidth(1);
 
-        graphicsContext.fillText("X: " + (int)actualPositionW, 1200, 50);
-        graphicsContext.fillText("Y: " + (int)actualPositionH, 1350, 50);
+        graphicsContext.fillText("X: " + (int)actualPositionW, 800, 50);
+        graphicsContext.fillText("Y: " + (int)actualPositionH, 900, 50);
 
-        graphicsContext.fillText("Output:", 1200, 90);
-        graphicsContext.fillText("Actual Case: "+ RandCaseName[RandTypeCase], 1200, 130);
-        Font theFont2 = Font.font("Helvetica", FontWeight.BOLD, 18);
+        graphicsContext.fillText("Output:", 800, 90);
+        graphicsContext.fillText("Actual Case: "+ RandCaseName[RandTypeCase], 800, 130);
+        Font theFont2 = Font.font("Helvetica", FontWeight.BOLD, 14);
         graphicsContext.setFont(theFont2);
-        graphicsContext.fillText("Actual Properities 1: "+ ActualPropertiesName[0], 1200, 170);
-        graphicsContext.fillText("Actual Properities 2: "+ ActualPropertiesName[1], 1200, 200);
-        graphicsContext.fillText("Actual Properities 3: "+ ActualPropertiesName[2], 1200, 230);
-        graphicsContext.fillText("Actual Properities 4: "+ ActualPropertiesName[3], 1200, 260);
+        graphicsContext.fillText("Actual Properities 1: "+ ActualPropertiesName[0], 800, 170);
+        graphicsContext.fillText("Actual Properities 2: "+ ActualPropertiesName[1], 800, 200);
+        graphicsContext.fillText("Actual Properities 3: "+ ActualPropertiesName[2], 800, 230);
+        graphicsContext.fillText("Actual Properities 4: "+ ActualPropertiesName[3], 800, 260);
 
-        graphicsContext.fillText("Actual Properities 1: "+ ActualPropertiesNameInt[0], 1200, 300);
-        graphicsContext.fillText("Actual Properities 2: "+ ActualPropertiesNameInt[1], 1200, 330);
-        graphicsContext.fillText("Actual Properities 3: "+ ActualPropertiesNameInt[2], 1200, 360);
-        graphicsContext.fillText("Actual Properities 4: "+ ActualPropertiesNameInt[3], 1200, 390);
+        graphicsContext.fillText("Actual Properities 1: "+ ActualPropertiesNameInt[0], 800, 300);
+        graphicsContext.fillText("Actual Properities 2: "+ ActualPropertiesNameInt[1], 800, 330);
+        graphicsContext.fillText("Actual Properities 3: "+ ActualPropertiesNameInt[2], 800, 360);
+        graphicsContext.fillText("Actual Properities 4: "+ ActualPropertiesNameInt[3], 800, 390);
 
         graphicsContext.setFont(theFont);
-        graphicsContext.fillText("Actual CaseType: "+ CaseTypeName, 1200, 440);
-        graphicsContext.fillText("Actual RegalType: "+ RegalTypeName, 1200, 480);
+        graphicsContext.fillText("Actual CaseType: "+ TypeCase, 800, 440); // TypeCase CaseTypeName
+        graphicsContext.fillText("Actual RegalType: "+ RegalTypeName, 800, 480);
 
     }
 

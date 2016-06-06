@@ -138,12 +138,12 @@ public class Gui {
                     break;
             }
 
-            if(ActualPropertiesNameInt[3] == 1){
-                TypeCase = 5; // Flameable
-            }
-            if(ActualPropertiesNameInt[3] == 2){
-                TypeCase = 6; // Cool
-            }
+//            if(ActualPropertiesNameInt[3] == 1){
+//                TypeCase = 5; // Flameable
+//            }
+//            if(ActualPropertiesNameInt[3] == 2){
+//                TypeCase = 6; // Cool
+//            }
 
             ShowActualCase(TypeCase);
         }

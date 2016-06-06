@@ -2,23 +2,21 @@ package sample.Genetic;
 
 public class Start {
     public static int estimation = 0;
-    public static String BLACK_AREA = "010100101100100";
-    public static String BLUE_AREA = "001000010001011";
-    public static String GREEN_AREA ="100010100000011";
-    public static String BROWN_AREA ="001010101100100";
-    public static String YELLOW_AREA ="100000110010001";
-    public static String RED_AREA ="010100100001110";
+    public static String HEAVY_AREA = "11110101001";
+    public static String LIGHT_AREA = "11111010001";
+    public static String COOL_AREA = "10101111010";
+    public static String FLAMMABLE_AREA = "11111111100";
+
     public static int finalEstimation = 0;
 
     public Start() {
 
-        startAlgorithm(BLACK_AREA);
     }
 
     public static void main(String[] args) {
 
-        //  startAlgorithm(BLACK_AREA);
-         startAlgorithm(BLUE_AREA);
+//        startAlgorithm(HEAVY_AREA);
+        startAlgorithm(COOL_AREA);
 
 
     }
@@ -35,6 +33,7 @@ public class Start {
         // for(int i=0; i<500; i++) {
 
         while(calculateEstimation(myPop.getFittest(), area) < calculateSolutionEstimation(area)) {
+
             generationCount++;
             System.out.println("");
             for(int j=0; j< 5; j++) {
@@ -58,35 +57,29 @@ public class Start {
     public static double calculateEstimation(Individual genesArray, String solution) {
         estimation = 0;
 
-        if( genesArray.getGene(0) == 1 ||  genesArray.getGene(1) == 1 || genesArray.getGene(2) == 1)
+        if( genesArray.getGene(0) == 1 ||  genesArray.getGene(1) == 1 || genesArray.getGene(2) == 1 || genesArray.getGene(3) == 1)
             if(genesArray.getGene(0) == Byte.parseByte(solution.substring(0,1)) &&
                     genesArray.getGene(1) == Byte.parseByte(solution.substring(1,2)) &&
-                    genesArray.getGene(2) == Byte.parseByte(solution.substring(2,3))) {
-                estimation += 50;
+                    genesArray.getGene(2) == Byte.parseByte(solution.substring(2,3)) &&
+                    genesArray.getGene(3) == Byte.parseByte(solution.substring(3,4))) {
+                estimation += 10;
             }
-        if( genesArray.getGene(3) == 1 ||  genesArray.getGene(4) == 1 || genesArray.getGene(5) == 1)
-            if(genesArray.getGene(3) == Byte.parseByte(solution.substring(3,4)) &&
-                    genesArray.getGene(4) == Byte.parseByte(solution.substring(4,5)) &&
+        if(  genesArray.getGene(4) == 1 || genesArray.getGene(5) == 1)
+            if(genesArray.getGene(4) == Byte.parseByte(solution.substring(4,5)) &&
                     genesArray.getGene(5) == Byte.parseByte(solution.substring(5,6))) {
-                estimation += 20;
+                estimation += 30;
             }
 
         if( genesArray.getGene(6) == 1 ||  genesArray.getGene(7) == 1)
             if(genesArray.getGene(6) == Byte.parseByte(solution.substring(6,7)) &&
                     genesArray.getGene(7) == Byte.parseByte(solution.substring(7,8))) {
-                estimation += 10;
+                estimation += 20;
             }
-        if( genesArray.getGene(8) == 1 ||  genesArray.getGene(9) == 1 || genesArray.getGene(10) == 1 ||
-                genesArray.getGene(11) == 1 ||  genesArray.getGene(12) == 1 ||
-                genesArray.getGene(13) == 1 || genesArray.getGene(14) == 1)
+        if( genesArray.getGene(8) == 1 ||  genesArray.getGene(9) == 1 || genesArray.getGene(10) == 1)
             if(genesArray.getGene(8) == Byte.parseByte(solution.substring(8,9)) &&
                     genesArray.getGene(9) == Byte.parseByte(solution.substring(9,10)) &&
-                    genesArray.getGene(10) == Byte.parseByte(solution.substring(10,11)) &&
-                    genesArray.getGene(11) == Byte.parseByte(solution.substring(11,12)) &&
-                    genesArray.getGene(12) == Byte.parseByte(solution.substring(12,13)) &&
-                    genesArray.getGene(13) == Byte.parseByte(solution.substring(13,14)) &&
-                    genesArray.getGene(14) == Byte.parseByte(solution.substring(14,15))) {
-                estimation += 5;
+                    genesArray.getGene(10) == Byte.parseByte(solution.substring(10,11))){
+                estimation += 40;
             }
         return estimation;
     }
@@ -99,11 +92,11 @@ public class Start {
         boolean blockState = false;
         for(int i = 0; i< solution.length(); i++) {
             if(Byte.parseByte(solution.substring(i,i+1)) == 1) {
-                if(i<3) {
-                    finalEstimation += 50;
+                if(i<4) {
+                    finalEstimation += 5;
                     blockWeight = true;
                 }
-                if(i>2 && i<6) {
+                if(i>3 && i<6) {
                     finalEstimation += 20;
                     blockMaterial = true;
                 }
@@ -111,8 +104,8 @@ public class Start {
                     finalEstimation += 10;
                     blockState = true;
                 }
-                if(i>7 && i<15 && !blockColor) {
-                    finalEstimation += 5;
+                if(i>7 && i<11 && !blockColor) {
+                    finalEstimation += 30;
                     blockColor = true;
                 }
             }
@@ -120,54 +113,42 @@ public class Start {
         return finalEstimation;
     }
     public static String getCaseGenes(Individual genesArray) {
-        String[] genesString = new String[15];
+        String[] genesString = new String[11];
         String genes = "[ ";
         if(genesArray.getGene(0) == 1) {
-            genesString[0] = "light";
+            genesString[0] = "Metal";
         }
         if(genesArray.getGene(1) == 1) {
-            genesString[1] = "heavy";
+            genesString[1] = "Paper";
         }
         if(genesArray.getGene(2) == 1) {
-            genesString[2] = "middleweight";
+            genesString[2] = "Gas";
         }
         if(genesArray.getGene(3) == 1) {
-            genesString[3] = "metal";
+            genesString[3] = "Wood";
         }
         if(genesArray.getGene(4) == 1) {
-            genesString[4] = "wooden";
+            genesString[4] = "Light";
         }
         if(genesArray.getGene(5) == 1) {
-            genesString[5] = "paper";
+            genesString[5] = "Heavy";
         }
         if(genesArray.getGene(6) == 1) {
-            genesString[6] = "solid";
+            genesString[6] = "Small";
         }
         if(genesArray.getGene(7) == 1) {
-            genesString[7] = "liquid";
+            genesString[7] = "Big";
         }
         if(genesArray.getGene(8) == 1) {
-            genesString[8] = "gray";
+            genesString[8] = "Flammable";
         }
         if(genesArray.getGene(9) == 1) {
-            genesString[9] = "brown";
+            genesString[9] = "Cool";
         }
         if(genesArray.getGene(10) == 1) {
-            genesString[10] = "white";
+            genesString[10] = "Normal";
         }
-        if(genesArray.getGene(11) == 1) {
-            genesString[11] = "red";
-        }
-        if(genesArray.getGene(12) == 1) {
-            genesString[12] = "black";
-        }
-        if(genesArray.getGene(13) == 1) {
-            genesString[13] = "blue";
-        }
-        if(genesArray.getGene(14) == 1) {
-            genesString[14] = "yellow";
-        }
-        for(int i=0; i< 15; i++) {
+        for(int i=0; i< 11; i++) {
             if(genesString[i] != null)
                 genes += genesString[i] + " ";
         }

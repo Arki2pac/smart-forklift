@@ -2,7 +2,7 @@ package sample.Genetic;
 
 public class Individual {
 
-    static int defaultGeneLength = 15;
+    static int defaultGeneLength = 11;
     private byte[] genes = new byte[defaultGeneLength];
 
     private int fitness = 0;

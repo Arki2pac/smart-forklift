@@ -213,73 +213,73 @@ public class Main extends Application {
         knowledgeBase = new KnowledgeBase();
 
         knowledgeBase.addData("Car Parts", "Metal");
-        knowledgeBase.addData("Car Parts", "30");
-        knowledgeBase.addData("Car Parts", "30");
+        knowledgeBase.addData("Car Parts", "Heavy");
+        knowledgeBase.addData("Car Parts", "Big");
         knowledgeBase.addData("Car Parts", "Normal");
 
         knowledgeBase.addData("Wood Car Parts", "Wood");
-        knowledgeBase.addData("Wood Car Parts", "20");
-        knowledgeBase.addData("Wood Car Parts", "20");
+        knowledgeBase.addData("Wood Car Parts", "Light");
+        knowledgeBase.addData("Wood Car Parts", "Big");
         knowledgeBase.addData("Wood Car Parts", "Normal");
 
         knowledgeBase.addData("Instructions", "Paper");
-        knowledgeBase.addData("Instructions", "10");
-        knowledgeBase.addData("Instructions", "10");
+        knowledgeBase.addData("Instructions", "Light");
+        knowledgeBase.addData("Instructions", "Small");
         knowledgeBase.addData("Instructions", "Flammable");
 
         knowledgeBase.addData("Nitro", "Gas");
-        knowledgeBase.addData("Nitro", "10");
-        knowledgeBase.addData("Nitro", "20");
+        knowledgeBase.addData("Nitro", "Light");
+        knowledgeBase.addData("Nitro", "Big");
         knowledgeBase.addData("Nitro", "Flammable");
 
         knowledgeBase.addData("Azot", "Gas");
-        knowledgeBase.addData("Azot", "10");
-        knowledgeBase.addData("Azot", "20");
+        knowledgeBase.addData("Azot", "Light");
+        knowledgeBase.addData("Azot", "Big");
         knowledgeBase.addData("Azot", "Cool");
 
         knowledgeBase.addData("Oxygen", "Gas");
-        knowledgeBase.addData("Oxygen", "10");
-        knowledgeBase.addData("Oxygen", "20");
+        knowledgeBase.addData("Oxygen", "Light");
+        knowledgeBase.addData("Oxygen", "Big");
         knowledgeBase.addData("Oxygen", "Normal");
 
         knowledgeBase.addData("Ammoniac", "Gas");
-        knowledgeBase.addData("Ammoniac", "10");
-        knowledgeBase.addData("Ammoniac", "20");
+        knowledgeBase.addData("Ammoniac", "Light");
+        knowledgeBase.addData("Ammoniac", "Big");
         knowledgeBase.addData("Ammoniac", "Flammable");
 
         knowledgeBase.addData("Mercury", "Metal");
-        knowledgeBase.addData("Mercury", "30");
-        knowledgeBase.addData("Mercury", "20");
+        knowledgeBase.addData("Mercury", "Heavy");
+        knowledgeBase.addData("Mercury", "Big");
         knowledgeBase.addData("Mercury", "Cool");
 
         knowledgeBase.addData("Fire extinguisher", "Metal");
-        knowledgeBase.addData("Fire extinguisher", "10");
-        knowledgeBase.addData("Fire extinguisher", "10");
+        knowledgeBase.addData("Fire extinguisher", "Light");
+        knowledgeBase.addData("Fire extinguisher", "Small");
         knowledgeBase.addData("Fire extinguisher", "Normal");
 
         knowledgeBase.addData("Oil Canister", "Metal");
-        knowledgeBase.addData("Oil Canister", "10");
-        knowledgeBase.addData("Oil Canister", "20");
-        knowledgeBase.addData("Oil Canister", "Normal");
+        knowledgeBase.addData("Oil Canister", "Light");
+        knowledgeBase.addData("Oil Canister", "Big");        // Heavy
+        knowledgeBase.addData("Oil Canister", "Normal");    // Light
 
         knowledgeBase.addData("Books", "Paper");
-        knowledgeBase.addData("Books", "10");
-        knowledgeBase.addData("Books", "10");
+        knowledgeBase.addData("Books", "Light");
+        knowledgeBase.addData("Books", "Small");
         knowledgeBase.addData("Books", "Flammable");
 
         knowledgeBase.addData("Notebooks", "Paper");
-        knowledgeBase.addData("Notebooks", "10");
-        knowledgeBase.addData("Notebooks", "10");
+        knowledgeBase.addData("Notebooks", "Light");
+        knowledgeBase.addData("Notebooks", "Small");
         knowledgeBase.addData("Notebooks", "Flammable");
 
         knowledgeBase.addData("Pine Boards", "Wood");
-        knowledgeBase.addData("Pine Boards", "20");
-        knowledgeBase.addData("Pine Boards", "20");
+        knowledgeBase.addData("Pine Boards", "Light");
+        knowledgeBase.addData("Pine Boards", "Big");
         knowledgeBase.addData("Pine Boards", "Flammable");
 
         knowledgeBase.addData("Table Parts", "Wood");
-        knowledgeBase.addData("Table Parts", "20");
-        knowledgeBase.addData("Table Parts", "20");
+        knowledgeBase.addData("Table Parts", "Light");
+        knowledgeBase.addData("Table Parts", "Big");
         knowledgeBase.addData("Table Parts", "Normal");
 
         knowledgeBaseInt = new KnowledgeBase();
@@ -757,20 +757,26 @@ public class Main extends Application {
         casePoints[numbercase][0] = x;       //X
         casePoints[numbercase][1] = y;       //Y
         switch (typecase) {
-                        case 1:
-                            casesToSpawn[numbercase] = caseOne;
-                            break;
-                        case 2:
-                            casesToSpawn[numbercase] = caseTwo;
-                            break;
-                        case 3:
-                            casesToSpawn[numbercase] = caseThree;
-                            break;
-                        case 4:
-                            casesToSpawn[numbercase] = caseFour;
-                            break;
-                    }
-        casesToSpawn[numbercase] = caseOne;
+            case 1:
+                casesToSpawn[numbercase] = caseOne; // Metal
+                break;
+            case 2:
+                casesToSpawn[numbercase] = caseTwo; // Paper
+                break;
+            case 3:
+                casesToSpawn[numbercase] = caseThree; // Gas
+                break;
+            case 4:
+                casesToSpawn[numbercase] = caseFour; // Wood
+                break;
+            case 5:
+                casesToSpawn[numbercase] = caseFive; // Flameable
+                break;
+            case 6:
+                casesToSpawn[numbercase] = caseSix; // Cool
+                break;
+        }
+
         IntStream.range(0, 20).forEach(
                 n -> {
                     int i = 0;
