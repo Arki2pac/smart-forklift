@@ -16,6 +16,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
 
+import static sample.DecisionTree.DecisionTreeMain.DecisionTreeTest;
+import static sample.DecisionTree.DecisionTreeMain.TreeRegal;
+
 import static sample.astar.OilArray.oilArray;
 import static sample.astar.OilArray.oilSlick;
 import static sample.astar.OilArray.oilsCoordinates;
@@ -147,6 +150,26 @@ public class Gui {
 
         if (currentlyActiveKeys.contains("G")){
             TypeRegal =  Regression(ActualPropertiesNameInt[0],ActualPropertiesNameInt[1],ActualPropertiesNameInt[2],ActualPropertiesNameInt[3]);
+            switch (TypeRegal) {
+                case 1:
+                    RegalTypeName = "Regal 1";
+                    break;
+                case 2:
+                    RegalTypeName = "Regal 2";
+                    break;
+                case 3:
+                    RegalTypeName = "Regal 3";
+                    break;
+                case 4:
+                    RegalTypeName = "Regal 4";
+                    break;
+            }
+
+        }
+
+        if (currentlyActiveKeys.contains("M")){
+            DecisionTreeTest(ActualPropertiesNameInt[0],ActualPropertiesNameInt[1],ActualPropertiesNameInt[2],ActualPropertiesNameInt[3]);
+            TypeRegal =  TreeRegal;
             switch (TypeRegal) {
                 case 1:
                     RegalTypeName = "Regal 1";
