@@ -4,10 +4,13 @@ import MachineLearning.Main;
 import MachineLearning.RegresjaWielowymiarowa;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import sample.Genetic.FitnessCalc;
 import sample.KnowledgeBase;
 import sample.astar.AstarPoints;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -19,6 +22,9 @@ import java.util.stream.IntStream;
 import static sample.DecisionTree.DecisionTreeMain.DecisionTreeTest;
 import static sample.DecisionTree.DecisionTreeMain.TreeRegal;
 
+import static sample.Genetic.Start.*;
+import static sample.Neural.NeuralMain.NeuralCase;
+import static sample.Neural.NeuralMain.NeuralTest;
 import static sample.astar.OilArray.oilArray;
 import static sample.astar.OilArray.oilSlick;
 import static sample.astar.OilArray.oilsCoordinates;
@@ -122,7 +128,7 @@ public class Gui {
             for (int i = 0; i < 4; i++){
                 ActualPropertiesNameInt[i] = Integer.valueOf(knowledgeBaseInt.getKnowledgeBase().get(RandCaseName[RandTypeCase]).get(i));
             }
-
+            SpecialName = ActualPropertiesName[3];
             switch (ActualPropertiesNameInt[0]) {
                 case 1:
                     TypeCase = 1; // Metal
@@ -137,7 +143,7 @@ public class Gui {
                     TypeCase = 4; // Wood
                     break;
             }
-
+            SetsCase = 3;
 //            if(ActualPropertiesNameInt[3] == 1){
 //                TypeCase = 5; // Flameable
 //            }
@@ -188,6 +194,91 @@ public class Gui {
 
         }
 
+        if (currentlyActiveKeys.contains("K")){
+            startAlgorithm(COOL_AREA);
+            startAlgorithm(HEAVY_AREA);
+            startAlgorithm(LIGHT_AREA);
+            startAlgorithm(FLAMMABLE_AREA);
+        }
+
+        if (currentlyActiveKeys.contains("D")){
+
+            try
+            {
+                Runtime r = Runtime.getRuntime();
+                Process p = r.exec("python /home/infokomes/Desktop/Project/smart-forklift/src/Neural/nauczone.py " + ActualPropertiesName[3]);
+                BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                p.waitFor();
+                String line = "";
+                while (br.ready()){
+                    System.out.println(br.readLine());
+                SetsCase =  Integer.parseInt(br.readLine());
+                    System.out.println(SetsCase);
+                }
+//                switch (SetsCase) {
+//                    case 1:
+//                        SpecialName = "Flammable";
+////                        TypeCase = 5;
+//                        break;
+//                    case 2:
+//                        SpecialName = "Cool";
+////                        TypeCase = 6;
+//                        break;
+//                    case 3:
+//                        SpecialName = "Normal";
+//                        break;
+//                }
+//
+//                ShowActualCase(TypeCase);
+
+            }
+            catch (Exception e)
+            {
+                String cause = e.getMessage();
+                if (cause.equals("python: not found"))
+                    System.out.println("No python interpreter found.");
+            }
+//
+        }
+
+        if (currentlyActiveKeys.contains("S")) {
+
+            NeuralTest();
+            SetsCase = NeuralCase;
+            switch (SetsCase) {
+                case 1:
+                    SpecialName = "Flammable";
+                    TypeCase = 5;
+                    break;
+                case 2:
+                    SpecialName = "Cool";
+                    TypeCase = 6;
+                    break;
+                case 3:
+                    SpecialName = "Normal";
+                    break;
+            }
+
+            ShowActualCase(TypeCase);
+
+//
+//            System.out.println(SetsCase);
+//            switch (SetsCase) {
+//                case 1:
+//                    SpecialName = "Flammable";
+//                        TypeCase = 5;
+//                    break;
+//                case 2:
+//                    SpecialName = "Cool";
+//                        TypeCase = 6;
+//                    break;
+//                case 3:
+//                    SpecialName = "Normal";
+//                    break;
+//            }
+//
+//            ShowActualCase(TypeCase);
+        }
    //To Tests
             // Arrow keys moving
             if (currentlyActiveKeys.contains("LEFT"))
@@ -226,43 +317,43 @@ public class Gui {
                 }
             }
             //Set case
-            if (currentlyActiveKeys.contains("F1"))
-            {
-                //skrzynka = ....
-//                rodzaj polki = regresion();
-                // actual case = skrzynka
-                actualCase = caseOne ;
-                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
-            }
-            if (currentlyActiveKeys.contains("F2"))
-            {
-                actualCase = caseTwo ;
-                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
-            }
-            if (currentlyActiveKeys.contains("F3"))
-            {
-                actualCase = caseThree ;
-                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
-            }
-            if (currentlyActiveKeys.contains("F4"))
-            {
-                actualCase = caseFour ;
-                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
-            }
+//            if (currentlyActiveKeys.contains("F1"))
+//            {
+//                //skrzynka = ....
+////                rodzaj polki = regresion();
+//                // actual case = skrzynka
+//                actualCase = caseOne ;
+//                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+//            }
+//            if (currentlyActiveKeys.contains("F2"))
+//            {
+//                actualCase = caseTwo ;
+//                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+//            }
+//            if (currentlyActiveKeys.contains("F3"))
+//            {
+//                actualCase = caseThree ;
+//                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+//            }
+//            if (currentlyActiveKeys.contains("F4"))
+//            {
+//                actualCase = caseFour ;
+//                graphicsContext.drawImage(actualCase, actualPositionW, actualPositionH);
+//            }
 
-            if (currentlyActiveKeys.contains("A"))
+            if (currentlyActiveKeys.contains("F1"))
             {
                 TypeRegal = 1;
             }
-            if (currentlyActiveKeys.contains("S"))
+            if (currentlyActiveKeys.contains("F2"))
             {
                 TypeRegal = 2;
             }
-            if (currentlyActiveKeys.contains("D"))
+            if (currentlyActiveKeys.contains("F3"))
             {
                 TypeRegal = 3;
             }
-            if (currentlyActiveKeys.contains("F"))
+            if (currentlyActiveKeys.contains("F4"))
             {
                 TypeRegal = 4;
             }

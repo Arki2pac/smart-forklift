@@ -57,7 +57,7 @@ public class RegresjaWielowymiarowa{
 
     public void read(){
         System.out.println();
-        System.out.println(beta(0) + " +\n + (" + beta(1) + " * objętość) +\n + (" + beta(2) + " * kolor) + \n + (" + beta(3) + " * waga) +\n + (" + beta(4) + " * łatwopalne) ");
+        System.out.println(beta(0) + " +\n + (" + beta(1) + " * Rodzaj) +\n + (" + beta(2) + " * waga) + \n + (" + beta(3) + " * objętość) +\n + (" + beta(4) + " * extra) ");
     }
 
     public void porownanie(double x[][], double[] y){
@@ -74,6 +74,9 @@ public class RegresjaWielowymiarowa{
     public int test(double x1, double x2, double x3, double x4){
         double polka;
         polka = beta(0) + beta(1) * x1 + beta(2) * x2 + beta(3) * x3 + beta(4) * x4;
-        return (int) polka;
+        System.out.println();
+        System.out.println(x1 + "||" + x2 + "||" + x3 + "||" + x4);
+        System.out.println(polka);
+        return (int) Math.round(polka);
     }
 }

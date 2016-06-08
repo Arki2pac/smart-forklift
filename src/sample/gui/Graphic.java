@@ -64,16 +64,21 @@ public class Graphic {
         graphicsContext.fillText("Actual Properities 1: "+ ActualPropertiesName[0], 800, 170);
         graphicsContext.fillText("Actual Properities 2: "+ ActualPropertiesName[1], 800, 200);
         graphicsContext.fillText("Actual Properities 3: "+ ActualPropertiesName[2], 800, 230);
-        graphicsContext.fillText("Actual Properities 4: "+ ActualPropertiesName[3], 800, 260);
+        graphicsContext.fillText("Actual Properities 4: "+ SpecialName, 800, 260);
 
-        graphicsContext.fillText("Actual Properities 1: "+ ActualPropertiesNameInt[0], 800, 300);
-        graphicsContext.fillText("Actual Properities 2: "+ ActualPropertiesNameInt[1], 800, 330);
-        graphicsContext.fillText("Actual Properities 3: "+ ActualPropertiesNameInt[2], 800, 360);
-        graphicsContext.fillText("Actual Properities 4: "+ ActualPropertiesNameInt[3], 800, 390);
+        graphicsContext.fillText("Regal Correctly Properities 1: ", 800, 300);
+        graphicsContext.fillText( RegalGood[0], 800, 330);
+        graphicsContext.fillText("Regal Correctly Properities 2: ", 800, 360);
+        graphicsContext.fillText( RegalGood[1], 800, 390);
+        graphicsContext.fillText("Regal Correctly Properities 3: ", 800, 420);
+        graphicsContext.fillText( RegalGood[2], 800, 450);
+        graphicsContext.fillText("Regal Correctly Properities 4: ", 800, 480);
+        graphicsContext.fillText( RegalGood[3], 800, 510);
+
 
         graphicsContext.setFont(theFont);
-        graphicsContext.fillText("Actual CaseType: "+ TypeCase, 800, 440); // TypeCase CaseTypeName
-        graphicsContext.fillText("Actual RegalType: "+ RegalTypeName, 800, 480);
+        graphicsContext.fillText("Actual CaseType: "+ TypeCase, 800, 550); // TypeCase CaseTypeName
+        graphicsContext.fillText("Actual RegalType: "+ RegalTypeName, 800, 590);
 
     }
 

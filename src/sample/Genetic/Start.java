@@ -1,5 +1,7 @@
 package sample.Genetic;
 
+import static sample.Main.RegalGood;
+
 public class Start {
     public static int estimation = 0;
     public static String HEAVY_AREA = "11110101001";
@@ -16,7 +18,11 @@ public class Start {
     public static void main(String[] args) {
 
 //        startAlgorithm(HEAVY_AREA);
-        startAlgorithm(COOL_AREA);
+//        startAlgorithm(COOL_AREA);
+        startAlgorithm(HEAVY_AREA);
+//        startAlgorithm(LIGHT_AREA);
+//        startAlgorithm(FLAMMABLE_AREA);
+
 
 
     }
@@ -32,9 +38,10 @@ public class Start {
         //   while (myPop.getFittest().getFitness() < FitnessCalc.getMaxFitness()) {
         // for(int i=0; i<500; i++) {
 
-        while(calculateEstimation(myPop.getFittest(), area) < calculateSolutionEstimation(area)) {
+//        while(calculateEstimation(myPop.getFittest(), area) < calculateSolutionEstimation(area)) {
+for (generationCount = 0;generationCount < 10; generationCount++){
 
-            generationCount++;
+//            generationCount++;
             System.out.println("");
             for(int j=0; j< 5; j++) {
                 System.out.println("Current genes package" + getCaseGenes(myPop.getIndividual(j)));
@@ -49,6 +56,17 @@ public class Start {
         System.out.println("Generation: " + generationCount);
         System.out.println("Best current case genes:");
         System.out.println(getCaseGenes(myPop.getFittest()));
+
+        if(area == COOL_AREA){
+            RegalGood[0]=getCaseGenes(myPop.getFittest());}
+        if(area == HEAVY_AREA){
+            RegalGood[1]=getCaseGenes(myPop.getFittest());}
+        if(area == LIGHT_AREA){
+            RegalGood[2]=getCaseGenes(myPop.getFittest());}
+        if(area == FLAMMABLE_AREA){
+            RegalGood[3]=getCaseGenes(myPop.getFittest());}
+
+
         System.out.println( "Final Estimation: " + calculateEstimation(myPop.getFittest(), area));
         System.out.println("Max estimation: " + calculateSolutionEstimation(area));
 
