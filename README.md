@@ -4,7 +4,7 @@
 ##Doosan Inteligent Forklift
 
 **The group:**
-* [Arkadiusz Chrobak](https://github.com/Arki2pac)
+* [Arkadiusz Chrobak](https://github.com/infokomes)
 * [Dominik Nowakowski](https://github.com/sidark)
 * [Grzegorz Podgórski](https://github.com/KorekGP)
 * [Maciej Nowakowski](https://github.com/TheMickeyMike)
